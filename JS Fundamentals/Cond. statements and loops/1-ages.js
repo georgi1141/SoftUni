@@ -14,3 +14,4 @@ function ages(num) {
         console.log(`out of bounds`)
     }
 }
+ages(4)
