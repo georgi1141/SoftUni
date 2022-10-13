@@ -1,5 +1,5 @@
 function arrManipulation(input) {
-  // pulling the first elementof the array and storing it into a variable
+  // pulling the first element of the array and storing it into a variable
   //  .split() returns an array
   //  .map() converts every element of the new array from a string to a number
   let array = input[0].split(" ").map(Number);
