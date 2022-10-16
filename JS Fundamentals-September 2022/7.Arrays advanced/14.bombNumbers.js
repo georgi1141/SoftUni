@@ -9,7 +9,7 @@ function bombNumbers(bombField, bombArray) {
       bombIndex = bombField.indexOf(bombArray[0]) //Index of special-bomb-number
       bombField.splice(bombIndex + 1, power); // Removing element on the right side of the bomb excluding bomb
       if (bombIndex - power < 0) { //IF bombs will deploy elements before 0;
-        bombField.splice(0, bombIndex + 1); //  Removing all elements including bombIndex
+        bombField.splice(0, bombIndex + 1); //  Removing all elements including bombIndexx
       } else {
         bombField.splice(bombIndex - power, power + 1); // Starting index , power + bomb
       }
