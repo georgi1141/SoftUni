@@ -50,3 +50,49 @@ modify([
   "decrease",
   "end",
 ]);
+
+          //---------------advanced------------//
+
+
+
+// function arrayModifier(elements) {
+//   let integers = elements.shift().split(' ').map(Number);
+//   //let modeArray = [];
+
+//   for (let el of elements) {
+
+//     let commands = el.split(' ');
+//     let [command, index1, index2] = [commands[0], Number(commands[1]), Number(commands[2])];
+
+//     //IF command is 'end'
+//     if (el === 'end') { return console.log(integers.join(', ')) }
+//     //"swap {index1} {index2}"
+//     else if (command === 'swap') {
+//       let buffer = integers[index1];
+//       integers[index1] = integers[index2];
+//       integers[index2] = buffer;
+//     }
+//     //"multiply {index1} {index2}"        
+//     else if (command === 'multiply') {
+//       let multiplier = integers[index1] * integers[index2];
+//       integers[index1] = multiplier;
+//     }
+//     //"decrease"
+//     else if (command === 'decrease') {
+//       // modeArray = integers.map((x) => x - 1);
+
+//       for (let n = 0; n < integers.length; n++) {
+//         integers[n] -= 1
+//       }
+//     }
+//   }
+// }
+// arrayModifier([
+//   '1 2 3 4',
+//   'swap 0 1',
+//   'swap 1 2',
+//   'swap 2 3',
+//   'multiply 1 2',
+//   'decrease',
+//   'end'
+// ])
