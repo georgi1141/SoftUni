@@ -18,7 +18,7 @@ function game(data) {
     if (
       indexOne == indexTwo ||
       indexOne < 0 ||
-      // !!!!!dont forget the '=' or '.length-1' when you have .length as it returns index+1 in this casa!!!!!
+      // !!!!!dont forget the '=' or '.length-1' when you have .length as it returns index+1 in this case!!!!!
       indexOne >= elements.length ||
       indexTwo < 0 ||
       indexTwo >= elements.length
