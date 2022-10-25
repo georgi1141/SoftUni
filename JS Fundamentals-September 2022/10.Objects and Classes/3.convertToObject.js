@@ -8,8 +8,6 @@ function convert(data) {
 
 convert('{"name": "George", "age": 40, "town": "Sofia"}');
 
-
-
 // 3. Convert to Object
 
 // Write a function that receives a string in JSON format and converts it to an object.
