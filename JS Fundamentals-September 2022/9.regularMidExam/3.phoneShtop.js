@@ -1,6 +1,5 @@
 function calc(data) {
   let initList = data.shift().split(", ");
-
   let command = data.shift();
 
   while (command !== "End") {
