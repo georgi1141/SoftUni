@@ -1,6 +1,8 @@
 function convert(data) {
   let person = JSON.parse(data);
 
+
+
   for (const key of Object.keys(person)) {
     console.log(`${key}: ${person[key]}`);
   }
