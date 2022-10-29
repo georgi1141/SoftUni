@@ -4,7 +4,7 @@ function movieInfo(data) {
   data.forEach((element) => {
     if (element.includes("addMovie ")) {
       let name = element.split("addMovie ")[1];
-      movies.push({ name });
+      movies.push({ name: name });
     } else if (element.includes(" directedBy ")) {
       let name = element.split(" directedBy ")[0];
       let director = element.split(" directedBy ")[1];
