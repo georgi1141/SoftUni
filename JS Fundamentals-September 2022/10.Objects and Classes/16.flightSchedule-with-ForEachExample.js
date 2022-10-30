@@ -1,30 +1,32 @@
-function flightSchedule(input) {
+function test(data) {
 
-  let flights = input.shift();
-  let changeStatus = input.shift();
-  let statusToCheck = input.shift().toString();
-  let flightList = {};
+  let allFlights = data.shift()
+  let newStatus = data.shift()
+  let statusToCkeck = data.shift().join()
+  let container = {}
 
+  allFlights.forEach(element => {
+    let [flightNum, destination] = element.split(' ')
+    container[flightNum] = { destination: destination, status: 'Ready to fly' }
+  });
 
-  for (let flight of flights) {
-    let [number, Destination] = flight.split(" ");
-    flightList[number] = { Destination, Status: "Ready to fly" };
-  }
-
-  for (let flight of changeStatus) {
-    let [number, currentStatus] = flight.split(" ");
-    if (flightList.hasOwnProperty(number)) {
-      flightList[number].Status = currentStatus;
+  newStatus.forEach(element => {
+    let [flightNum, command] = element.split(' ')
+    if (container.hasOwnProperty(flightNum)) {
+      container[flightNum] = command
     }
-  }
-
-  for (let flight in flightList) {
-    if (flightList[flight].Status === statusToCheck) {
-      console.log(flightList[flight]);
+  })
+  console.log(container);
+  for (const key in container) {
+    if (container[key].status === statusToCkeck) {
+      console.log(container[key]);
     }
   }
 }
-flightSchedule([
+
+
+
+test([
   [
     "WN269 Delaware",
     "FL2269 Oregon",
