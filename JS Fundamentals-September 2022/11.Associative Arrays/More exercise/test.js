@@ -1,5 +1,3 @@
-
-
 // get element between specific chars in string
 
 let someString = " user name [25] is cool";
@@ -55,7 +53,4 @@ let firstName = 'Georgi'
 
 let letters = [...firstName]
 console.log(letters);
-
-// the spread operator works in itterables but NOT on objects sunce objects are not itterable
-
 
