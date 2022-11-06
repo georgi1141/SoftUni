@@ -1,3 +1,5 @@
+
+
 // get element between specific chars in string
 
 let someString = " user name [25] is cool";
@@ -23,6 +25,19 @@ let someObj = {
 // with variable having same name as object key
 let { name } = someObj;
 //setting new name to variables instead of having the key object as a name
-let { age: myAge } = someObj;
+// also setting default value in case the propwert does not exists
+let { age: myAge = [] } = someObj;
 
 console.log(myAge, name);
+
+// destructuring nested Object
+let someObject = {
+  openingHours: {
+    friday: 8
+  }
+}
+const { openingHours: { friday } } = someObject
+
+console.log(friday);
+// the same output
+console.log(someObject.openingHours.friday);
