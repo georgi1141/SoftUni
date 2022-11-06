@@ -41,3 +41,21 @@ const { openingHours: { friday } } = someObject
 console.log(friday);
 // the same output
 console.log(someObject.openingHours.friday);
+
+// spread operator on array
+
+let arr1 = [1, 2, 3]
+let arr2 = [4, 5, 6]
+// it unpachs/spreads the values out of the array
+let combined = [...arr1, ...arr2]
+console.log(combined);
+
+// spread operator on string
+let firstName = 'Georgi'
+
+let letters = [...firstName]
+console.log(letters);
+
+// the spread operator works in itterables but NOT on objects sunce objects are not itterable
+
+
