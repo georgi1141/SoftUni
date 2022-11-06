@@ -7,12 +7,12 @@ function solve(data) {
     // if the current line has length 2
     if (line.split(" ").length === 2) {
       let [courseName, capacity] = line.split(": ");
-      // check if the is NOT present
+      // check if the course is NOT present and add it 
       if (!courses[courseName]) {
-        // insert capacity and empy array for later on
+        // insert capacity and empty students array for later on
         courses[courseName] = { capacity: Number(capacity), students: [] };
       } else {
-        //if it is present so add the new value to the old
+        //if it is present ,add the new value to the old
         courses[courseName].capacity += Number(capacity);
       }
     } else {
