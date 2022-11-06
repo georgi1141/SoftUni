@@ -1,4 +1,5 @@
 function listOfGests(params) {
+
   let vip = [];
   let regular = [];
   let current = params.shift();
@@ -16,7 +17,6 @@ function listOfGests(params) {
   // checking if the rest of the geests in the input after PARTY command are in the VIP or regular list
   for (let index = 0; index < params.length; index++) {
     let firstElement = params[index].charAt(0);
-    // if guest 
     if (firstElement >= "0" && firstElement <= "9") {
       if (vip.includes(params[index])) {
         let i = vip.indexOf(params[index]);
