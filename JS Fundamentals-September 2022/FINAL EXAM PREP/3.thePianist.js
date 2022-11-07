@@ -1,7 +1,8 @@
 function organiser(data) {
+  // get first element out and save it
   let numPieces = Number(data.shift());
+  // will store new data in object
   let collection = {};
-
   // put numPieces in collection with composer and key properties
   for (let i = 0; i < numPieces; i++) {
     let line = data[i].split("|");
@@ -16,11 +17,13 @@ function organiser(data) {
   }
   // cut the number of added elements in the object from the intial data
   data = data.splice(numPieces);
-
+  // go through all data
   data.forEach((element) => {
+    // get the current line of input
     let command = element.split("|");
+    // get first element of the input line
     let firstElement = command[0];
-
+    // check if we have command Stop and if we dont go through all cases Add-Remove-ChangeKey
     while (firstElement !== "Stop") {
       if (firstElement === "Add") {
         let piece = command[1];
@@ -59,11 +62,12 @@ function organiser(data) {
           console.log(`Changed the key of ${elementToChange} to ${key}!`);
         }
       }
+      //brake every time in order to update the state,otherwise infinite loop...
       return;
     }
   });
+  // get the entries of the final object in order to print
   let entries = Object.entries(collection);
-
   entries.forEach((element) => {
     let piece = element[0];
     let entries = Object.entries(element[1]);
