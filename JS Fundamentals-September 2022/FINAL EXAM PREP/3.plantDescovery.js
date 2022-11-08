@@ -16,11 +16,9 @@ function info(data) {
   data = data.splice(numPlants);
   // get current line
   let command = data.shift();
-
   while (command !== "Exhibition") {
     let command1 = command.split(": ");
     let currentCommand = command1[0];
-
     switch (currentCommand) {
       case "Rate":
         let command = command1[1].split(" - ");
