@@ -54,3 +54,5 @@ let firstName = 'Georgi'
 let letters = [...firstName]
 console.log(letters);
 
+
+
