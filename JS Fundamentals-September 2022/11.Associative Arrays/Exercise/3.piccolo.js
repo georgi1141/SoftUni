@@ -14,6 +14,7 @@ function solve(numPlates) {
     x[0].localeCompare(y[0])
   );
 
+
   if (entries.length === 0) {
     console.log(`Parking Lot is Empty`);
   } else {

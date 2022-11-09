@@ -68,13 +68,18 @@ function organiser(data) {
   });
   // get the entries of the final object in order to print
   let entries = Object.entries(collection);
-  entries.forEach((element) => {
-    let piece = element[0];
-    let entries = Object.entries(element[1]);
-    let composer = entries[0][1];
-    let key = entries[1][1];
+  // using destructuring
+  for (const [piece, { composer, key }] of entries) {
     console.log(`${piece} -> Composer: ${composer}, Key: ${key}`);
-  });
+  }
+  // old code that I later on optimized it with destructurung
+  // entries.forEach((element) => {
+  //   let piece = element[0];
+  //   let entries = Object.entries(element[1]);
+  //   let composer = entries[0][1];
+  //   let key = entries[1][1];
+  //   console.log(`${piece} -> Composer: ${composer}, Key: ${key}`);
+  // });
 }
 
 organiser([

@@ -9,7 +9,7 @@ function info(data) {
     if (obj[plantName]) {
       obj[plantName].rarity = rarity;
     } else {
-      obj[plantName] = { Rarity: Number(rarity), Rating: [] };
+      obj[plantName] = { rarity: Number(rarity), rating: [] };
     }
   }
   // delete inserted plants from initial data as we wont need it anymore
@@ -28,7 +28,7 @@ function info(data) {
           console.log("error");
           break;
         } else {
-          obj[plantName].Rating.push(rating);
+          obj[plantName].rating.push(rating);
         }
         break;
       case "Update":
@@ -39,7 +39,7 @@ function info(data) {
           console.log("error");
           break;
         } else {
-          obj[plantNameUpdate].Rarity = newRarity;
+          obj[plantNameUpdate].rarity = newRarity;
         }
 
         break;
@@ -50,7 +50,7 @@ function info(data) {
           console.log("error");
           break;
         } else {
-          obj[plantNameReset].Rating = [];
+          obj[plantNameReset].rating = [];
         }
         break;
     }
@@ -61,17 +61,24 @@ function info(data) {
   console.log(`Plants for the exhibition:`);
   // get entries
   let entries = Object.entries(obj);
-  // loop thgrough entries
-  entries.forEach((element) => {
-    let name = element[0];
-    let elements = Object.entries(element[1]);
-    let rarity = elements[0][1];
-    let rating = elements[1][1];
-
+  // loop thgrough entries and destructure parameters in the loop variable
+  for (const [name, { rarity, rating }] of entries) {
     console.log(
       `- ${name}; Rarity: ${rarity}; Rating: ${average(rating).toFixed(2)}`
     );
-  });
+
+  }
+  // old code that was replaced
+  // entries.forEach((element) => {
+  //   let name = element[0];
+  //   let elements = Object.entries(element[1]);
+  //   let rarity = elements[0][1];
+  //   let rating = elements[1][1];
+
+  //   console.log(
+  //     `- ${name}; Rarity: ${rarity}; Rating: ${average(rating).toFixed(2)}`
+  //   );
+  // });
   // function to calc the average
   function average(arr) {
     if (arr.length === 0) {
