@@ -5,7 +5,6 @@ function refactor(words, sentance) {
     const match = "*".repeat(word.length);
     sentance = sentance.replace(match, word);
   }
-
   console.log(sentance);
 }
 
