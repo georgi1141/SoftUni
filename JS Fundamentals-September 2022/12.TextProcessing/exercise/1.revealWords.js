@@ -1,13 +1,18 @@
-function refactor(word, sentance) {
+function refactor(words, sentance) {
+  let wordsArray = words.split(", ");
 
-  console.log(sentance.replace('*', word));
+  for (const word of wordsArray) {
+    const match = "*".repeat(word.length);
+    sentance = sentance.replace(match, word);
+  }
 
-
+  console.log(sentance);
 }
 
-
-refactor('great',
-  'softuni is ***** place for learning new programming languages')
+refactor(
+  "great, learning",
+  "softuni is ***** place for ******** new programming languages"
+);
 
 // 1. Reveal Words
 // Write a function, which receives two parameters.
