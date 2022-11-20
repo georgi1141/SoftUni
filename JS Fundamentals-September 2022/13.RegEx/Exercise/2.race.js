@@ -1,10 +1,10 @@
 function receInfo(input) {
   // get names
   let participants = input.shift();
-  // build patterns
+  // build patterns from RegExp
   let namePattern = /[A-Za-z]+/g;
   let distancePattern = /[0-9]+/g;
-  // store data in object
+  // create obkect to store data later in
   let obj = {};
   // get first line of the input
   let line = input.shift();
@@ -13,12 +13,16 @@ function receInfo(input) {
     let currentName = line.match(namePattern).join("");
     let currentNumber = line.match(distancePattern).join("").split("");
     let sum = 0;
+    //sum of all numbers from array
     currentNumber.forEach((num) => {
       sum += Number(num);
     });
+    // if current name is in the participants
     if (participants.includes(currentName)) {
+      // if current name is already in the object
       if (obj[currentName]) {
         obj[currentName] += sum;
+        // if it is not
       } else {
         obj[currentName] = sum;
       }
@@ -27,7 +31,7 @@ function receInfo(input) {
     line = input.shift();
   }
 
-  // get entries nad sort by value
+  // get entries and sort by value, then log it 
   let keys = Object.entries(obj).sort((a, b) => b[1] - a[1]);
   for (let i = 0; i <= 2; i++) {
     if (i == 0) {
