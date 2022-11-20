@@ -1,3 +1,5 @@
+
+
 // getting 70/100 and can not find out why
 
 
@@ -18,26 +20,29 @@ function solve(input) {
   // calc the threshold
   let threshold = toStr.match(patternNums)
   let sumThreshold = threshold[0]
-  if (threshold.length > 0) {
+  if (threshold !== null) {
     for (let i = 1; i < threshold.length; i++) {
       sumThreshold *= threshold[i]
     }
   } else {
     threshold = 0
   }
+  if (matches !== null) {
 
-  for (const match of matches) {
-    emojiCounter++
-    // getting the current emoji-word but without the '::' and '**'
-    let currentEmoji = match.groups.emoji.match(getWordOnly).join('')
-    let currentEmobiSplitted = currentEmoji.split('')
-    let sumEmoji = 0
-    // looping throgh the splitted word to calc all the ASCII char values in the current word
-    for (let i = 0; i < currentEmobiSplitted.length; i++) {
-      sumEmoji += currentEmobiSplitted[i].charCodeAt(0)
-    }
-    if (sumEmoji > sumThreshold) {
-      emojiContainer.push(match.groups.emoji)
+
+    for (const match of matches) {
+      emojiCounter++
+      // getting the current emoji-word but without the '::' and '**'
+      let currentEmoji = match.groups.emoji.match(getWordOnly).join('')
+      let currentEmobiSplitted = currentEmoji.split('')
+      let sumEmoji = 0
+      // looping throgh the splitted word to calc all the ASCII char values in the current word
+      for (let i = 0; i < currentEmobiSplitted.length; i++) {
+        sumEmoji += currentEmobiSplitted[i].charCodeAt(0)
+      }
+      if (sumEmoji > sumThreshold) {
+        emojiContainer.push(match.groups.emoji)
+      }
     }
   }
   // log collected data as needed
