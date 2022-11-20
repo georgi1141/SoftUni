@@ -17,9 +17,13 @@ function solve(input) {
   let matches = toStr.matchAll(pattern)
   // calc the threshold
   let threshold = toStr.match(patternNums)
-  let sumThreshold = 1
-  for (let i = 0; i < threshold.length; i++) {
-    sumThreshold *= threshold[i]
+  let sumThreshold = threshold[0]
+  if (threshold.length > 0) {
+    for (let i = 1; i < threshold.length; i++) {
+      sumThreshold *= threshold[i]
+    }
+  } else {
+    threshold = 0
   }
 
   for (const match of matches) {
@@ -28,7 +32,7 @@ function solve(input) {
     let currentEmoji = match.groups.emoji.match(getWordOnly).join('')
     let currentEmobiSplitted = currentEmoji.split('')
     let sumEmoji = 0
-    // loopinh throgh the splitted word to calc all the ASCII char valiues in a current word
+    // looping throgh the splitted word to calc all the ASCII char values in the current word
     for (let i = 0; i < currentEmobiSplitted.length; i++) {
       sumEmoji += currentEmobiSplitted[i].charCodeAt(0)
     }
