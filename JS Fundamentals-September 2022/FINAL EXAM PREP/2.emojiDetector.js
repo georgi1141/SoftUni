@@ -1,56 +1,30 @@
+function solve(text) {
+  text = text.toString();
+  let patternEm = /(\:{2}|\*{2})(?<emoji>[A-Z][a-z]{2,})\1/g;
+  let numPattern = /(?<num>[0-9]+)/g;
 
+  let allFindNum = text.match(numPattern);
+  let coolFindedDig = '';
 
-// getting 70/100 and can not find out why
-
-
-function solve(input) {
-  // pattern to get all nums in the text
-  let patternNums = /\d/gm
-  // pattern to get the emojis out of the text
-  let pattern = /(?<emoji>([:|*]{2})[A-Z][a-z]{2,}\2)/gm
-  // patern to separate the emojis from the special symbols - '::' and '**'
-  let getWordOnly = /\w/g
-  // counter for the valid emojis
-  let emojiCounter = 0
-  // container for the emojis so I can collect it and print it at the end
-  let emojiContainer = []
-  // convert the array into string and get all matches
-  let toStr = input.shift()
-  let matches = toStr.matchAll(pattern)
-  // calc the threshold
-  let threshold = toStr.match(patternNums)
-  let sumThreshold = threshold[0]
-  if (threshold !== null) {
-    for (let i = 1; i < threshold.length; i++) {
-      sumThreshold *= threshold[i]
-    }
-  } else {
-    threshold = 0
+  for (let digit of allFindNum) {
+    coolFindedDig += digit
   }
-  if (matches !== null) {
-
-
-    for (const match of matches) {
-      emojiCounter++
-      // getting the current emoji-word but without the '::' and '**'
-      let currentEmoji = match.groups.emoji.match(getWordOnly).join('')
-      let currentEmobiSplitted = currentEmoji.split('')
-      let sumEmoji = 0
-      // looping throgh the splitted word to calc all the ASCII char values in the current word
-      for (let i = 0; i < currentEmobiSplitted.length; i++) {
-        sumEmoji += currentEmobiSplitted[i].charCodeAt(0)
-      }
-      if (sumEmoji > sumThreshold) {
-        emojiContainer.push(match.groups.emoji)
-      }
-    }
+  let coolCount = 1;
+  for (let plus of coolFindedDig) {
+    coolCount *= Number(plus)
   }
-  // log collected data as needed
+  console.log(`Cool threshold: ${coolCount}`)
 
-  console.log(`Cool threshold: ${sumThreshold}`);
-  console.log(`${emojiCounter} emojis found in the text. The cool ones are:`);
-  if (!emojiContainer.length == 0) {
-    console.log(emojiContainer.join('\n'));
+  let count = text.match(patternEm)
+  console.log(`${count.length} emojis found in the text. The cool ones are:`)
+  for (let emo of count) {
+    let currentCoolCount = 0;
+    for (let i = 2; i < emo.length - 2; i++) {
+      currentCoolCount += emo[i].charCodeAt();
+    }
+    if (currentCoolCount >= coolCount) {
+      console.log(emo)
+    }
   }
 }
 
