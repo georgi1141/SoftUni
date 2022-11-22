@@ -1,24 +1,28 @@
 function solve(text) {
+  // array to string
   text = text.toString();
+  // pattern for finding the word
   let patternEm = /(\:{2}|\*{2})(?<emoji>[A-Z][a-z]{2,})\1/g;
+  // pattern for finding the number
   let numPattern = /(?<num>[0-9]+)/g;
-
+  //get all numbers and store it in a string
   let allFindNum = text.match(numPattern);
   let coolFindedDig = '';
-
   for (let digit of allFindNum) {
     coolFindedDig += digit
   }
+  // multiply in ortder to find the cool count and print the needed messaage 
   let coolCount = 1;
   for (let plus of coolFindedDig) {
     coolCount *= Number(plus)
   }
   console.log(`Cool threshold: ${coolCount}`)
-
+  // get all the words with their symbols
   let count = text.match(patternEm)
   console.log(`${count.length} emojis found in the text. The cool ones are:`)
   for (let emo of count) {
     let currentCoolCount = 0;
+    // find if an emoji is valid by calculating their ASCII values of all letters
     for (let i = 2; i < emo.length - 2; i++) {
       currentCoolCount += emo[i].charCodeAt();
     }
