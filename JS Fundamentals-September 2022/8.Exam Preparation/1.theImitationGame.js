@@ -1,38 +1,75 @@
+function passCrusher(data) {
+  // get needed elements from data
+  let encryptedMessage = data.shift()
+  let instructions = data.slice()
+  // get one instruction and will update later on in the while loop
+  let currentInstruction = instructions.shift()
+  // while currentInstruction is different than 'Decode' - itarate 
+  while (currentInstruction !== 'Decode') {
+    let [command, arg1, arg2] = currentInstruction.split('|')
+    // manipulate string depending on the command
+    if (command == 'Move') {
+      encryptedMessage = encryptedMessage.slice(arg1) + encryptedMessage.slice(0, arg1)
+    } else if (command == 'Insert') {
+      encryptedMessage = encryptedMessage.slice(0, arg1) + arg2 + encryptedMessage.slice(arg1)
+    } else if (command == 'ChangeAll') {
+      // this next line with replaceAll method does not work in Judge
+      // encryptedMessage = encryptedMessage.replaceAll(arg1, arg2)
+      // build a new srting because replaceAll method does not word in Judge as it uses an old Node.js version and therefore does not support the method. Solution below..
+      let buildNewString = ''
+      for (let i = 0; i < encryptedMessage.length; i++) {
+        if (encryptedMessage[i] == arg1) {
+          buildNewString += arg2
+        } else {
+          buildNewString += encryptedMessage[i]
+        }
+      }
+      // replace the new string with the replaced chars in it
+      encryptedMessage = buildNewString
+    }
+    // update the current instruction
+    currentInstruction = instructions.shift()
+  }
+  // print final message on the console
+  console.log(`The decrypted message is: ${encryptedMessage}`)
+}
+
+
 
 //------------------83/100----------------//
 
 
-function passCrusher(input) {
-  let encriptedWord = input.shift().split("");
-  let command = input.shift();
+// function passCrusher(input) {
+//   let encriptedWord = input.shift().split("");
+//   let command = input.shift();
 
-  while (command !== "Decode") {
-    let [key, valueOne, valueTwo] = command.split("|");
+//   while (command !== "Decode") {
+//     let [key, valueOne, valueTwo] = command.split("|");
 
-    switch (key) {
-      case "Move":
-        let toMove = encriptedWord.splice(0, valueOne);
-        for (let i = 0; i < toMove.length; i++) {
-          encriptedWord.push(toMove[i]);
-        }
-        break;
-      case "Insert":
-        encriptedWord.splice(valueOne, 0, valueTwo);
+//     switch (key) {
+//       case "Move":
+//         let toMove = encriptedWord.splice(0, valueOne);
+//         for (let i = 0; i < toMove.length; i++) {
+//           encriptedWord.push(toMove[i]);
+//         }
+//         break;
+//       case "Insert":
+//         encriptedWord.splice(valueOne, 0, valueTwo);
 
-        break;
-      case "ChangeAll":
-        for (let i = 0; i < encriptedWord.length; i++) {
-          if (encriptedWord[i] === valueOne) {
-            encriptedWord[i] = valueTwo;
-          }
-        }
-        break;
-    }
-    command = input.shift();
-  }
+//         break;
+//       case "ChangeAll":
+//         for (let i = 0; i < encriptedWord.length; i++) {
+//           if (encriptedWord[i] === valueOne) {
+//             encriptedWord[i] = valueTwo;
+//           }
+//         }
+//         break;
+//     }
+//     command = input.shift();
+//   }
 
-  console.log(`The decrypted message is: ${encriptedWord.join("")}`);
-}
+//   console.log(`The decrypted message is: ${encriptedWord.join("")}`);
+// }
 
 passCrusher(["zzHe", "ChangeAll|z|l", "Insert|2|o", "Move|3", "Decode"]);
 passCrusher(["owyouh", "Move|2", "Move|3", "Insert|3|are", "Insert|9|?", "Decode"]);
