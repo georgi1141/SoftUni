@@ -46,7 +46,6 @@ function solve(data) {
           activationKey = newStr;
           console.log(activationKey);
         }
-
         break;
       case "Slice":
         // deleting part of the string by indexed
