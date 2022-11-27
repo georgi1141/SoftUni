@@ -48,7 +48,7 @@ function solve(data) {
         }
         break;
       case "Slice":
-        // deleting part of the string by indexed
+        // deleting part of the string by indexes
         let startIndexSlice = splittedArr[1];
         let endIndexSlice = splittedArr[2];
         let newStr =
