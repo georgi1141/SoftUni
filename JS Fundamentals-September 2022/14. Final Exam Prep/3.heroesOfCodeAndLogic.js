@@ -1,4 +1,5 @@
 function solve(data) {
+
   let numHeroes = Number(data.shift());
   let heroesObject = {};
 
@@ -19,6 +20,7 @@ function solve(data) {
       heroesObject[heroName].MP = Number(MP);
     }
   }
+
   let commands = data.slice(numHeroes);
   let currentLine = commands.shift();
 

@@ -1,5 +1,5 @@
 function stopPlanner(data) {
-  //getting first line as a string and remoce it from data
+  //getting first line as a string and remoжe it from data
   let stops = data.shift();
 
   // itarate through data
