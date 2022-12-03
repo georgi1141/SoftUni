@@ -13,7 +13,7 @@ function solve(data) {
     switch (command) {
       case "Contains":
         let substring = splittedArr[1];
-        // if the element is some where to be fount in the key
+        // if the element is somewhere to be fount in the key
         if (activationKey.includes(substring)) {
           console.log(`${activationKey} contains ${substring}`);
         } else {
@@ -21,7 +21,7 @@ function solve(data) {
         }
         break;
       case "Flip":
-        // getting indexes start and end and replace that part with either upper or lower case deoending on the case
+        // getting indexes start and end and replace that part with either upper or lower case depending on the case
         let UpperLower = splittedArr[1];
         let startIndex = splittedArr[2];
         let endIndex = splittedArr[3];
@@ -58,7 +58,6 @@ function solve(data) {
         console.log(activationKey);
         break;
     }
-
     instructions = data.shift();
   }
   // logging the modified key
