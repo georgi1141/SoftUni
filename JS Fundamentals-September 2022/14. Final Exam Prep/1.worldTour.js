@@ -13,7 +13,7 @@ function stopPlanner(data) {
     // chack all commands
     switch (command) {
       case "Add Stop":
-        // if undex is valid
+        // if index is valid
         if (indexOne >= 0 && indexOne < stops.length) {
           stops =
             stops.slice(0, Number(indexOne)) +
