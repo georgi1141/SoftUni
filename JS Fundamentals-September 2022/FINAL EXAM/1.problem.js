@@ -74,7 +74,7 @@ function pass(data) {
         let patternThree = /[\d]+/gm;
         if (!patternThree.test(pass)) {
           console.log("Password must consist at least one digit!");
-        }
+        } 
 
         break;
     }
