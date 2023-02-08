@@ -1,0 +1,24 @@
+{
+  "name": "softuni",
+  "version": "1.0.0",
+  "description": "This is a repo with my progress with learning JavaScript Basics and Fundamentals. There are many exercises with solutions of problems that I have been solving through the course.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgi1141/SoftUnii.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgi1141/SoftUnii/issues"
+  },
+  "homepage": "https://github.com/georgi1141/SoftUnii#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
