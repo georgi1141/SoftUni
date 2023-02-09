@@ -24,5 +24,6 @@ function cardFactory(face, suit) {
 }
 
 let card = cardFactory('A', 'S')
+
 card.toString()
 
