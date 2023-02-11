@@ -27,3 +27,5 @@ let card = cardFactory('A', 'S')
 
 card.toString()
 
+module.exports = cardFactory
+
