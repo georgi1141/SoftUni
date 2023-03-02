@@ -69,7 +69,8 @@ function solve() {
         fromDateElement.value = dateName;
         daysCountElement.value = daysName;
 
-        ulTicketInfoElement.innerHTML = "";
+        
+        liElement.remove()
         nextBtn.disabled = false;
       });
 
