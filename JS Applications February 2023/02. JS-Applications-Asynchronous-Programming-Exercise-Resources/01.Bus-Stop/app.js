@@ -2,10 +2,12 @@ async function getInfo() {
   const value = document.querySelector("#stopId").value;
   const stopNameElement = document.querySelector("#stopName");
   const ulElement = document.querySelector("#buses");
+  const button = document.querySelector('#submit')
 
   const url = `http://localhost:3030/jsonstore/bus/businfo/${value}`;
 
   try {
+    
     stopNameElement.textContent = "Loading...";
     ulElement.replaceChildren();
     const res = await (await fetch(url)).json();
