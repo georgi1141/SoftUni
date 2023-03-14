@@ -18,6 +18,11 @@
   "homepage": "https://github.com/georgi1141/SoftUnii#readme",
   "dependencies": {
     "chai": "^4.3.7",
+    "lit-html": "^2.6.1",
     "mocha": "^10.2.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": []
 }
