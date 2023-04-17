@@ -46,13 +46,29 @@ async function onSubmit(e) {
 
   const firstName = formData.get("firstName");
   const lastName = formData.get("lastName");
-  const facultyNumber = Number(formData.get("facultyNumber"));
-  const grade = Number(formData.get("grade"));
+  const facultyNumber = formData.get("facultyNumber");
+  const grade = formData.get("grade");
+
+
+const patternString = /[a-zA-Z]/gm
+const patterNumber = /[0-9]/gm
+
 
   if (firstName == "" || lastName == "" || facultyNumber == "" || grade == "") {
     formElement.reset();
     return alert("All fields must be filled in!");
+  }else if(!firstName.match(patternString)){
+    return alert ('First name must contain only letters!');
+  }else if(!lastName.match(patternString)){
+    return alert ('Last name must contain only letters!');
+  }  else if(!grade.match(patterNumber)){
+    return alert ('Grade must contain only numbers!');
   }
+  
+  else if(!facultyNumber.match(patterNumber)){
+    return alert ('Faculty number must contain only numbers!');
+  }
+
 
   try {
     const options = {
