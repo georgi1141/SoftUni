@@ -13,3 +13,14 @@ export function setUserData(data) {
 export function clearUserData() {
     localStorage.removeItem(itemName);
 }
+
+export function createSubminHandler(callback){
+    return function(e){
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        callback(data,form)
+    }
+    
+}

@@ -1,12 +1,14 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { login } from "../data/auth.js";
+import { createSubminHandler } from "../data/util.js";
 
-const loginTemplate = () => html`
+const loginTemplate = (onLogin) => html`
   <div class="container home wrapper  my-md-5 pl-md-5">
     <div class="row-form d-md-flex flex-mb-equal ">
       <div class="col-md-4">
         <img class="responsive" src="./images/idea.png" alt="" />
       </div>
-      <form class="form-user col-md-7" action="" method="">
+      <form @submit=${onLogin} class="form-user col-md-7" action="" method="">
         <div class="text-center mb-4">
           <h1 class="h3 mb-3 font-weight-normal">Login</h1>
         </div>
@@ -48,6 +50,20 @@ const loginTemplate = () => html`
 `;
 
 export async function loginView(ctx) {
-  return ctx.render(loginTemplate());
+
+  return ctx.render(loginTemplate(createSubminHandler(onLogin)));
+
+
+  async function onLogin({email,password},form) {
+
+    await login(email,password);
+    form.reset();
+    ctx.page.redirect('/');
+
+
+
+  }
+
+
 
 }

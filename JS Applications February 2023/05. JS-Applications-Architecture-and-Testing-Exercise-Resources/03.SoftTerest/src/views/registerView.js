@@ -1,11 +1,13 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { register } from "../data/auth.js";
+import { createSubminHandler } from "../data/util.js";
 
-const registerTemplate = () => html` <div class="container home wrapper  my-md-5 pl-md-5">
+const registerTemplate = (onRegister) => html` <div class="container home wrapper  my-md-5 pl-md-5">
 <div class="row-form d-md-flex flex-mb-equal ">
     <div class="col-md-4">
         <img class="responsive" src="./images/idea.png" alt="">
     </div>
-    <form class="form-user col-md-7" action="" method="">
+    <form @submit=${onRegister} class="form-user col-md-7" action="" method="">
         <div class="text-center mb-4">
             <h1 class="h3 mb-3 font-weight-normal">Register</h1>
         </div>
@@ -37,7 +39,19 @@ const registerTemplate = () => html` <div class="container home wrapper  my-md-5
 `;
 
 export async function registerView(ctx) {
-  return ctx.render(registerTemplate());
+  return ctx.render(registerTemplate(createSubminHandler(onRegister)));
 
+  async function onRegister({email,password,repeatPassword},form) {
+
+    if (password!== repeatPassword) {
+      return  alert('Passwords do not match')
+    }
+
+    await register(email, password,);
+    form.reset();
+    ctx.page.redirect("/");
+
+
+  }
 
 }
