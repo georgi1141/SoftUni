@@ -23,7 +23,9 @@ const dashboardTemplate = () => html`   <div id="dashboard-holder">
     <a class="btn" href="">Details</a>
 </div>
 <h1>No ideas yet! Be the first one :)</h1>
-</div>`
+</div>
+
+`
 
 export async function dashboardView(ctx) {
   return ctx.render(dashboardTemplate());
