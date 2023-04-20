@@ -5,15 +5,21 @@
   "main": "index.html",
   "scripts": {
     "test": "mocha tests",
-    "start": "http-server -a localhost -p 3000 -P http://localhost:3000?"
+    "start": "http-server -a localhost -p 3000 -P http://localhost:3000?",
+    "start-lite":"lite-server"
+
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "lit-html": "^2.7.2",
+    "lite-server": "^2.6.1",
+    "page": "^1.11.6",
+    "playwright-chromium": "^1.32.3"
+  },
   "devDependencies": {
     "chai": "4.3.3",
     "http-server": "0.12.3",
-    "mocha": "8.3.0",
-    "playwright-chromium": "1.9.1"
+    "mocha": "8.3.0"
   }
 }
