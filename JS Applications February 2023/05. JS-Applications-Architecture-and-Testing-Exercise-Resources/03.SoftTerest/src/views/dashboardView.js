@@ -7,7 +7,7 @@ const dashboardTemplate = (recipes) => html`
         <div class="card-body">
         <p class="card-text">${recipe.title}</p>
         </div>
-        <img class="card-image" src="${recipe.img}" alt="Card image cap">
+        <img class="card-image" src=${recipe.img} alt="Card image cap">
         <a class="btn" href="">Details</a>
     </div>`):html`<h1>No ideas yet! Be the first one :)</h1>`}
    

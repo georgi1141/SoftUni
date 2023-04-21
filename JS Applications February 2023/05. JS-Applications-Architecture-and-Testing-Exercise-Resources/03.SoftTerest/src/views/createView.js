@@ -1,12 +1,13 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { createRecipe, createSubminHandler } from "../data/util.js";
 
-const createTemplate = () => html`
+const createTemplate = (onSubmit) => html`
   <div class="container home wrapper  my-md-5 pl-md-5">
         <div class=" d-md-flex flex-mb-equal ">
             <div class="col-md-6">
                 <img class="responsive-ideas create" src="./images/creativity_painted_face.jpg" alt="">
             </div>
-            <form class="form-idea col-md-5" action="#/create" method="post">
+            <form @submit=${onSubmit} class="form-idea col-md-5" action="#/create" method="post">
                 <div class="text-center mb-4">
                     <h1 class="h3 mb-3 font-weight-normal">Share Your Idea</h1>
                 </div>
@@ -21,8 +22,8 @@ const createTemplate = () => html`
                         required=""></textarea>
                 </div>
                 <div class="form-label-group">
-                    <label for="inputURL">Add Image</label>
-                    <input type="text" id="inputURL" name="imageURL" class="form-control" placeholder="Image URL"
+                    <label for="img">Add Image</label>
+                    <input type="text" id="img" name="img" class="form-control" placeholder="image url"
                         required="">
 
                 </div>
@@ -34,8 +35,20 @@ const createTemplate = () => html`
     </div>
 `
 
-export async function createView(ctx) {
-  return ctx.render(createTemplate());
+export async function createView(ctx) { 
+  return ctx.render(createTemplate(createSubminHandler(onSubmit)));
+
+  async function onSubmit({title,description,img},form){
+    
+    await createRecipe(title,description,img);
+    
+    form.reset();
+    ctx.page.redirect('/dashboard');
+
+
+  }
+
+
 
 }
 

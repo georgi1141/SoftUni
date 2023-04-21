@@ -1,8 +1,9 @@
-import {  get } from "./api.js";
+import {  get,post } from "./api.js";
 
 const itemName = 'userData';
 
-const getRecipeEndpoin = '/data/ideas'
+const getAndCreateRecipeEndpoin = '/data/ideas'
+const createRecipeEndpoin = '/data/ideas'
 
 export function getUserData() {
     return JSON.parse(localStorage.getItem(itemName));
@@ -30,5 +31,10 @@ export function createSubminHandler(callback){
 
 export async function getRecipes() {
 
-    return get(getRecipeEndpoin)
+    return get(getAndCreateRecipeEndpoin)
+}
+
+export async function createRecipe(title,description,img) {
+    await post(createRecipeEndpoin,{title,description,img})
+    
 }
