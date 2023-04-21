@@ -1,6 +1,8 @@
-
+import {  get } from "./api.js";
 
 const itemName = 'userData';
+
+const getRecipeEndpoin = '/data/ideas'
 
 export function getUserData() {
     return JSON.parse(localStorage.getItem(itemName));
@@ -24,4 +26,9 @@ export function createSubminHandler(callback){
         callback(data,form)
     }
     
+}
+
+export async function getRecipes() {
+
+    return get(getRecipeEndpoin)
 }

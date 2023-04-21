@@ -1,38 +1,29 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { getRecipes } from "../data/util.js";
 
-const dashboardTemplate = () => html`   <div id="dashboard-holder">
-<div class="card overflow-hidden current-card details" style="width: 20rem; height: 18rem;">
-    <div class="card-body">
-        <p class="card-text">Dinner Recipe</p>
-    </div>
-    <img class="card-image" src="./images/dinner.jpg" alt="Card image cap">
-    <a class="btn" href="">Details</a>
-</div>
-<div class="card overflow-hidden current-card details" style="width: 20rem; height: 18rem;">
-    <div class="card-body">
-        <p class="card-text">4 easy DIY ideas to try!</p>
-    </div>
-    <img class="card-image" src="./images/brightideacropped.jpg" alt="Card image cap">
-    <a class="btn" href="">Details</a>
-</div>
-<div class="card overflow-hidden current-card details" style="width: 20rem; height: 18rem;">
-    <div class="card-body">
-        <p class="card-text">Best Pilates Workouts to Do at Home</p>
-    </div>
-    <img class="card-image" src="./images/best-pilates-youtube-workouts-2__medium_4x3.jpg" alt="Card image cap">
-    <a class="btn" href="">Details</a>
-</div>
-<h1>No ideas yet! Be the first one :)</h1>
+const dashboardTemplate = (recipes) => html`   
+<div id="dashboard-holder">
+    ${recipes? recipes.map(recipe=> html`<div class="card overflow-hidden current-card details" style="width: 20rem; height: 18rem;">
+        <div class="card-body">
+        <p class="card-text">${recipe.title}</p>
+        </div>
+        <img class="card-image" src="${recipe.img}" alt="Card image cap">
+        <a class="btn" href="">Details</a>
+    </div>`):html`<h1>No ideas yet! Be the first one :)</h1>`}
+   
 </div>
 
 `
 
 export async function dashboardView(ctx) {
-  return ctx.render(dashboardTemplate());
+    
+  return ctx.render(dashboardTemplate(await displayRecipes()));
 
+  async function displayRecipes() {
+    const data =  await getRecipes()
+    return data  
+  }
 }
-
-
 
 
 
