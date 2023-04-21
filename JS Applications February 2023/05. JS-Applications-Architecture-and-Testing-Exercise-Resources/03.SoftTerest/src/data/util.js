@@ -15,6 +15,7 @@ export function clearUserData() {
 }
 
 export function createSubminHandler(callback){
+    
     return function(e){
         e.preventDefault();
         const form = e.target;
