@@ -5,6 +5,7 @@ import { renderNav } from './middlewares/navMiddleware.js'
 
 import { createView } from './views/createView.js'
 import { dashboardView } from './views/dashboardView.js'
+import { detailsView } from './views/detailsView.js'
 import { homeView } from './views/homeView.js'
 import { loginView } from './views/loginView.js'
 import { registerView } from './views/registerView.js'
@@ -17,6 +18,7 @@ page(renderNav)
 
 page('/',homeView)
 page('/dashboard',dashboardView)
+page('/dashboard/:id',detailsView)
 page('/create',createView)
 page('/login',loginView)
 page('/register',registerView)

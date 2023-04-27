@@ -1,4 +1,4 @@
-import {  get,post } from "./api.js";
+import {  del, get,post } from "./api.js";
 
 const itemName = 'userData';
 
@@ -37,4 +37,13 @@ export async function getRecipes() {
 export async function createRecipe(title,description,img) {
     await post(createRecipeEndpoin,{title,description,img})
     
+}
+
+export async function getDetails(id) {
+
+    return get(`/data/ideas/${id}`)
+}
+
+export async function deleteRecipe(id){
+     del(`/data/ideas/${id}`)
 }
