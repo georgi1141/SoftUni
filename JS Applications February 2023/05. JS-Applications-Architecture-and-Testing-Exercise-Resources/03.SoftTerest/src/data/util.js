@@ -45,5 +45,5 @@ export async function getDetails(id) {
 }
 
 export async function deleteRecipe(id){
-     del(`/data/ideas/${id}`)
+    await del(`/data/ideas/${id}`)
 }

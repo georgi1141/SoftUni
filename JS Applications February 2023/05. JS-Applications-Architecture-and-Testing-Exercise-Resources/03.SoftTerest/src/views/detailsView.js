@@ -1,7 +1,7 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
-import { deleteRecipe, getDetails } from "../data/util.js";
+import { deleteRecipe, getDetails, getUserData } from "../data/util.js";
 
-const detailsTemplate = (recipe) => html`
+const detailsTemplate = (recipe,onDelete) => html`
   <img class="det-img" src=../${recipe.img} />
   <div class="container home some">
     <div class="desc">
@@ -10,22 +10,38 @@ const detailsTemplate = (recipe) => html`
       <p class="idea-description">${recipe.description}</p>
     </div>
     <div class="text-center">
-      <a class="btn detb" href="">Delete</a>
+      ${recipe.canEdit ? html`<a @click=${onDelete} class="btn detb" href="javascript:void(0)">Delete</a>`:null}
     </div>
   </div>
-`;
-let id = null;
-let ctx;
+`
+
+
 
 export async function detailsView(ctx) {
-  ctx = ctx;
-  id = ctx.params.id;
+  const id = ctx.params.id;
 
-  return ctx.render(detailsTemplate(await displayRecipe(id)));
+  const data = await getDetails(id);
 
-  async function displayRecipe(id) {
-    const data = await getDetails(id);
-
-    return data;
+  const userData = getUserData()
+  if (userData) {
+    data.canEdit = userData._id == data._ownerId;
   }
+
+  return ctx.render(detailsTemplate(data,onDelete));
+
+  async function onDelete() {
+    const choice = confirm("Are you sure you want to delete this recipe?");
+
+    if (choice) {
+      await deleteRecipe(id)
+      ctx.page.redirect('/dashboard');
+
+    }
+
+    
+
+  }
+
+
 }
+
