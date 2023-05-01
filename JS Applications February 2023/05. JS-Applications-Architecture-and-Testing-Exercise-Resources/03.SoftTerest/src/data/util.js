@@ -26,7 +26,7 @@ export function createSubminHandler(callback){
         const data = Object.fromEntries(formData.entries());
         callback(data,form)
     }
-    
+     
 }
 
 export async function getRecipes() {
