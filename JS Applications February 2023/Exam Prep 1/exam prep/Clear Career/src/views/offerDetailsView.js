@@ -22,7 +22,7 @@ const offerDetailsTemplate = (offer, isCreator) => html`
           <span>${offer.requirements}</span>
         </div>
       </div>
-      <p>Applications: <strong id="applications">1</strong></p>
+      <!-- <p>Applications: <strong id="applications">1</strong></p> -->
       ${isCreator
         ? html` <div id="action-buttons">
             <a href="/dashboard/${offer._id}/edit" id="edit-btn">Edit</a>
@@ -37,7 +37,7 @@ export const detailsView = async (ctx) => {
   const id = ctx.params.id;
 
   const offerDetails = await getOfferDetails(id);
-  console.log(offerDetails);
+  // console.log(offerDetails);
   let isCreator;
   const userData = getUserData();
   if (userData) {

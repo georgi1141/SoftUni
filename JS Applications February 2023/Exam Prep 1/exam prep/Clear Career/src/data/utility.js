@@ -1,4 +1,4 @@
-import { post,get, del } from "./api.js"
+import { post,get, del,put } from "./api.js"
 
 const itemName = 'userData'
 
@@ -20,6 +20,11 @@ export function clearUserData(){
 export async function createOffer(data){
 
     await post('/data/offers',data)
+
+}
+export async function editOffer(id,data){
+
+    return await put(`/data/offers/${id}`,data)
 
 }
 

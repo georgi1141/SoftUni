@@ -59,8 +59,8 @@ export const createOfferView = (ctx) => {
         ctx.page.redirect("/login");
         return alert("Please login to create an offer!");
       }
-      ctx.page.redirect("/dashboard");
       createOffer(offer);
+      ctx.page.redirect("/dashboard");
     }
   }
   ctx.render(createOfferTemplate(handleSubmit));
