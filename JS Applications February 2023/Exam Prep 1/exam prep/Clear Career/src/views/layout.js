@@ -1,7 +1,5 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 
-const layoutElement = document.querySelector("#wrapper");
-
 const user = html`
   <!-- Logged-in users -->
   <div class="user">
