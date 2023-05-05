@@ -56,7 +56,7 @@ export async function addBookView(ctx) {
     const imageUrl = data.get("imageUrl");
     const type = data.get("type");
 
-    if (!title || !description || !imageUrl) {
+    if (title=='' || description=='' || imageUrl=='' || type=='') {
       return alert("Please fill in all fields");
     }
     const userData = getUserData();

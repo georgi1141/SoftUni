@@ -268,7 +268,7 @@ describe('E2E tests', function () {
         });
 
         it('create does NOT work with empty fields [ 5 Points ]', async () => {
-            const { post } = await createHandler(endpoints.create, { post: '' });
+            const { post } = await createHandler(endpoints.create, { post: '' }); 
 
             await page.click('text=Add Book');
             await page.waitForTimeout(interval);
