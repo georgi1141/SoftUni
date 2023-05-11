@@ -1,10 +1,51 @@
 const http = require("http");
 const fs = require("fs");
-const path = require("path");
+const formidable = require("formidable");
 
 const server = http.createServer(async (req, res) => {
-  //  let ress = Array.from( req.url.split("="))[1]
-  //  console.log(ress.replaceAll('+',' '))
+  const url = new URL(req.url, `http://${req.headers.host}`);
+
+  if (url.pathname == "/addCat") {
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, files) => {
+      if (err) throw err;
+
+      const name = fields.name;
+      const description = fields.description;
+      const upload = files.upload.originalFilename;
+      const breed = fields.breed;
+
+      if (fs.existsSync("cats.json")) {
+        const catData = JSON.parse(fs.readFileSync("cats.json"));
+        catData.push({
+          id: catData.length + 1,
+          name: name,
+          description: description,
+          image: upload,
+          breed: breed,
+        });
+        fs.writeFile("cats.json", JSON.stringify(catData), (err) => {
+          if (err) throw err;
+          console.log("Data written to file");
+        });
+      } else {
+        const catData = [
+          {
+            id: 1,
+            name: name,
+            description: description,
+            image: upload,
+            breed: breed,
+          },
+        ];
+        fs.writeFile("cats.json", JSON.stringify(catData), (err) => {
+          if (err) throw err;
+          console.log("File created and data written to file");
+        });
+      }
+    });
+  }
 
   if (req.method === "POST") {
     let body = "";
