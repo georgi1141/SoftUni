@@ -2,6 +2,8 @@ const http = require("http");
 const fs = require("fs");
 const formidable = require("formidable");
 
+
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
@@ -46,8 +48,8 @@ const server = http.createServer(async (req, res) => {
       }
     });
   }
-
-  if (req.method === "POST") {
+    // get breed and push it in the array
+  else if (req.method === "POST") {
     let body = "";
     req.on("data", (chunk) => {
       body += chunk.toString(); // convert Buffer to string
@@ -59,7 +61,7 @@ const server = http.createServer(async (req, res) => {
       }
     });
   }
-
+    //display all cats red from the json file
   if (req.url == "/") {
     fs.readFile("./resources/views/home/index.html", "utf8", (err, data) => {
       if (err) throw err;
@@ -79,7 +81,9 @@ const server = http.createServer(async (req, res) => {
         res.end();
       });
     });
-  } else if (req.url == "/content/styles/site.css") {
+  } 
+  
+  else if (req.url == "/content/styles/site.css") {
     fs.readFile("./resources/content/styles/site.css", "utf8", (err, data) => {
       if (err) throw err;
       res.writeHead(200, {
@@ -148,9 +152,11 @@ function createBreedHtml(args) {
   return result;
 }
 
+
+
 function createCat(cat) {
   return `  <li id=${cat.id}>
-  <img src="${cat.image}" alt="Black Cat">
+  <img src="${cat.image.startsWith('http')? cat.image:`resources/views/home${cat.image}`}" alt="pic of a cat">
   <h3>${cat.name}</h3>
   <p><span>Breed: </span>${cat.breed}</p>
   <p><span>Description: </span>${cat.description}</p>
