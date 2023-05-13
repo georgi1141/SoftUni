@@ -1,11 +1,12 @@
 const http = require("http");
 const fs = require("fs");
 const formidable = require("formidable");
-
-
+const path = require("path");
+const urll = require("url");
 
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, `http://${req.headers.host}`);
+  const url = urll.parse(req.url).pathname
+  // const url = new URL(req.url, `http://${req.headers.host}`);
 
   if (url.pathname == "/addCat") {
     const form = new formidable.IncomingForm();
@@ -15,8 +16,16 @@ const server = http.createServer(async (req, res) => {
 
       const name = fields.name;
       const description = fields.description;
-      const upload = files.upload.originalFilename;
+      const upload = files.upload._writeStream.path;
       const breed = fields.breed;
+
+        const fileName = `newFile${Math.floor(Math.random() * 100)}.jpg`
+        const newFilePath = './resources/content/images/' + fileName
+
+        fs.rename(upload,newFilePath,(err)=>{
+          if (err) throw err;
+        })
+        
 
       if (fs.existsSync("cats.json")) {
         const catData = JSON.parse(fs.readFileSync("cats.json"));
@@ -24,7 +33,7 @@ const server = http.createServer(async (req, res) => {
           id: catData.length + 1,
           name: name,
           description: description,
-          image: upload,
+          image: fileName,
           breed: breed,
         });
         fs.writeFile("cats.json", JSON.stringify(catData), (err) => {
@@ -37,7 +46,7 @@ const server = http.createServer(async (req, res) => {
             id: 1,
             name: name,
             description: description,
-            image: upload,
+            image: fileName,
             breed: breed,
           },
         ];
@@ -46,9 +55,12 @@ const server = http.createServer(async (req, res) => {
           console.log("File created and data written to file");
         });
       }
-    });
+    }
+    );
+    
+    
   }
-    // get breed and push it in the array
+  // get breed and push it in the array
   else if (req.method === "POST") {
     let body = "";
     req.on("data", (chunk) => {
@@ -59,13 +71,15 @@ const server = http.createServer(async (req, res) => {
       if (breed) {
         breeds.push(breed);
       }
+      res.writeHead(302, { Location: "/addCat" });
+      res.end();
     });
   }
-    //display all cats red from the json file
+  //display all cats red from the json file
   if (req.url == "/") {
     fs.readFile("./resources/views/home/index.html", "utf8", (err, data) => {
       if (err) throw err;
-      fs.readFile("./cats.json", "utf8", (err, data1) => {
+      fs.readFile("./cats.json",  (err, data1) => {
         const cats = JSON.parse(data1);
         let result = "";
         cats.forEach((cat) => {
@@ -81,9 +95,7 @@ const server = http.createServer(async (req, res) => {
         res.end();
       });
     });
-  } 
-  
-  else if (req.url == "/content/styles/site.css") {
+  } else if (req.url == "/content/styles/site.css") {
     fs.readFile("./resources/content/styles/site.css", "utf8", (err, data) => {
       if (err) throw err;
       res.writeHead(200, {
@@ -152,11 +164,9 @@ function createBreedHtml(args) {
   return result;
 }
 
-
-
 function createCat(cat) {
   return `  <li id=${cat.id}>
-  <img src="${cat.image.startsWith('http')? cat.image:`resources/views/home${cat.image}`}" alt="pic of a cat">
+  <img src="${path.join('../content/images/' + cat.image)}" alt="${cat.name}">
   <h3>${cat.name}</h3>
   <p><span>Breed: </span>${cat.breed}</p>
   <p><span>Description: </span>${cat.description}</p>
