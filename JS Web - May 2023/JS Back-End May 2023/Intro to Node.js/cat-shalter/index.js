@@ -5,10 +5,9 @@ const path = require("path");
 const urll = require("url");
 
 const server = http.createServer(async (req, res) => {
-  const url = urll.parse(req.url).pathname
-  // const url = new URL(req.url, `http://${req.headers.host}`);
+  const url = urll.parse(req.url).pathname;
 
-  if (url.pathname == "/addCat") {
+  if (url == "/addCat") {
     const form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
@@ -19,47 +18,50 @@ const server = http.createServer(async (req, res) => {
       const upload = files.upload._writeStream.path;
       const breed = fields.breed;
 
-        const fileName = `newFile${Math.floor(Math.random() * 100)}.jpg`
-        const newFilePath = './resources/content/images/' + fileName
+      const fileName = `newFile${Math.floor(Math.random() * 100)}.jpg`;
+      const newFilePath = "./resources/content/images/" + fileName;
 
-        fs.rename(upload,newFilePath,(err)=>{
-          if (err) throw err;
-        })
-        
+      fs.rename(upload, newFilePath, (err) => {
+        if (err) throw err;
 
-      if (fs.existsSync("cats.json")) {
-        const catData = JSON.parse(fs.readFileSync("cats.json"));
-        catData.push({
-          id: catData.length + 1,
-          name: name,
-          description: description,
-          image: fileName,
-          breed: breed,
-        });
-        fs.writeFile("cats.json", JSON.stringify(catData), (err) => {
-          if (err) throw err;
-          console.log("Data written to file");
-        });
-      } else {
-        const catData = [
-          {
-            id: 1,
+        if (fs.existsSync("cats.json")) {
+          const catData = JSON.parse(fs.readFileSync("cats.json"));
+          catData.push({
+            id: catData.length + 1,
             name: name,
             description: description,
             image: fileName,
             breed: breed,
-          },
-        ];
-        fs.writeFile("cats.json", JSON.stringify(catData), (err) => {
-          if (err) throw err;
-          console.log("File created and data written to file");
-        });
-      }
-    }
-    );
-    
-    
+          });
+          fs.writeFile("cats.json", JSON.stringify(catData), (err) => {
+            if (err) throw err;
+            console.log("Data written to file");
+
+            res.writeHead(302, { Location: "/" });
+            res.end();
+          });
+        } else {
+          const catData = [
+            {
+              id: 1,
+              name: name,
+              description: description,
+              image: fileName,
+              breed: breed,
+            },
+          ];
+          fs.writeFile("cats.json", JSON.stringify(catData), (err) => {
+            if (err) throw err;
+            console.log("File created and data written to file");
+
+            res.writeHead(302, { Location: "/" });
+            res.end();
+          });
+        }
+      });
+    });
   }
+
   // get breed and push it in the array
   else if (req.method === "POST") {
     let body = "";
@@ -76,10 +78,10 @@ const server = http.createServer(async (req, res) => {
     });
   }
   //display all cats red from the json file
-  if (req.url == "/") {
+  if (url == "/") {
     fs.readFile("./resources/views/home/index.html", "utf8", (err, data) => {
       if (err) throw err;
-      fs.readFile("./cats.json",  (err, data1) => {
+      fs.readFile("./cats.json", (err, data1) => {
         const cats = JSON.parse(data1);
         let result = "";
         cats.forEach((cat) => {
@@ -95,7 +97,7 @@ const server = http.createServer(async (req, res) => {
         res.end();
       });
     });
-  } else if (req.url == "/content/styles/site.css") {
+  } else if (url == "/content/styles/site.css") {
     fs.readFile("./resources/content/styles/site.css", "utf8", (err, data) => {
       if (err) throw err;
       res.writeHead(200, {
@@ -104,7 +106,7 @@ const server = http.createServer(async (req, res) => {
       res.write(data);
       res.end();
     });
-  } else if (req.url == "/favicon.ico") {
+  } else if (url == "/favicon.ico") {
     fs.readFile(
       "./resources/content/images/pawprint.ico",
       "utf8",
@@ -117,7 +119,7 @@ const server = http.createServer(async (req, res) => {
         res.end();
       }
     );
-  } else if (req.url == "/addBreed") {
+  } else if (url == "/addBreed") {
     fs.readFile("./resources/views/addBreed.html", "utf8", (err, data) => {
       if (err) throw err;
       res.writeHead(200, {
@@ -126,7 +128,7 @@ const server = http.createServer(async (req, res) => {
       res.write(data);
       res.end();
     });
-  } else if (req.url == "/addCat") {
+  } else if (url == "/addCat") {
     fs.readFile("./resources/views/addCat.html", "utf8", (err, data) => {
       if (err) throw err;
       res.writeHead(200, {
@@ -135,6 +137,31 @@ const server = http.createServer(async (req, res) => {
       let result = data.replace("{breed}", createBreedHtml(breeds));
       res.write(result);
       res.end();
+    });
+  } else if (url.includes("/catEdit")) {
+    const id = Number(url.split("/").pop());
+    console.log(id);
+
+    res.end();
+  } else if (url.includes("/catFindNewHome")) {
+    const id = Number(url.split("/").pop());
+
+    fs.readFile("./cats.json", (err, data) => {
+      const cats = JSON.parse(data);
+      let filteredCats = [];
+      for (let i = 0; i < cats.length; i++) {
+        if (cats[i].id != id) {
+          filteredCats.push(cats[i]);
+        }
+      }
+
+      fs.writeFile("cats.json", JSON.stringify(filteredCats), (err) => {
+        if (err) throw err;
+        console.log("Data written to file");
+
+        res.writeHead(302, { Location: "/" });
+        res.end();
+      });
     });
   } else {
     res.writeHead(200, {
@@ -166,13 +193,15 @@ function createBreedHtml(args) {
 
 function createCat(cat) {
   return `  <li id=${cat.id}>
-  <img src="${path.join('../content/images/' + cat.image)}" alt="${cat.name}">
+  <img src="${path.join("../content/images/" + cat.image)}" alt="${cat.name}">
   <h3>${cat.name}</h3>
   <p><span>Breed: </span>${cat.breed}</p>
   <p><span>Description: </span>${cat.description}</p>
   <ul class="buttons">
-      <li class="btn edit"><a href="">Change Info</a></li>
-      <li class="btn delete"><a href="">New Home</a></li>
+      <li class="btn edit"><a href="/catEdit/${cat.id}">Change Info</a></li>
+      <li class="btn delete"><a href="/catFindNewHome/${
+        cat.id
+      }">New Home</a></li>
   </ul>
 </li>`;
 }
