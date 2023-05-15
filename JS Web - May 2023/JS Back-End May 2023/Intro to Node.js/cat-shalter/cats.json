@@ -1,1 +1,23 @@
-[{"id":1,"name":"a","description":"a","image":"newFile43.jpg","breed":"Bombay Cat"},{"id":2,"name":"bb","description":"bb","image":"newFile54.jpg","breed":"Bombay Cat"}]
+[
+  {
+    "id": 1,
+    "name": "a",
+    "description": "a",
+    "image": "newFile39.jpg",
+    "breed": "Bombay Cat"
+  },
+  {
+    "id": 2,
+    "name": "asd",
+    "description": "asd",
+    "image": "newFile1.jpg",
+    "breed": "Bombay Cat"
+  },
+  {
+    "id": 3,
+    "name": "a",
+    "description": "a",
+    "image": "newFile88.jpg",
+    "breed": "Bombay Cat"
+  }
+]

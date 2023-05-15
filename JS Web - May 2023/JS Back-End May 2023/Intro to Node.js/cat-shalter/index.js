@@ -3,9 +3,27 @@ const fs = require("fs");
 const formidable = require("formidable");
 const path = require("path");
 const urll = require("url");
+const querystring = require("querystring");
 
 const server = http.createServer(async (req, res) => {
   const url = urll.parse(req.url).pathname;
+
+  // if(url.startsWith("/content/imagess/") && url.endsWith("jpg") || url.endsWith("jpeg") || url.startsWith("png")) {
+  //   //TODO
+  //   const fileNameArr = url.split('/')
+  //   const fileName = fileNameArr[fileNameArr.length-1]
+
+  //   fs.readFile('./resources/content/images/' + fileName,(err,data)=>{
+
+  //     res.writeHead(200, {
+  //       "Content-Type": "image/jpeg",
+  //     });
+  //     res.write(data);
+  //     res.end();
+
+
+  //   })
+  // }
 
   if (url == "/addCat") {
     const form = new formidable.IncomingForm();
@@ -24,8 +42,8 @@ const server = http.createServer(async (req, res) => {
       fs.rename(upload, newFilePath, (err) => {
         if (err) throw err;
 
-        if (fs.existsSync("cats.json")) {
-          const catData = JSON.parse(fs.readFileSync("cats.json"));
+        if (fs.exists("cats.json")) {
+          const catData = JSON.parse(fs.readFile("cats.json"));
           catData.push({
             id: catData.length + 1,
             name: name,
@@ -193,15 +211,13 @@ function createBreedHtml(args) {
 
 function createCat(cat) {
   return `  <li id=${cat.id}>
-  <img src="${path.join("../content/images/" + cat.image)}" alt="${cat.name}">
+  <img src="/content/imagess/${cat.image}" alt="${cat.name}">
   <h3>${cat.name}</h3>
   <p><span>Breed: </span>${cat.breed}</p>
   <p><span>Description: </span>${cat.description}</p>
   <ul class="buttons">
       <li class="btn edit"><a href="/catEdit/${cat.id}">Change Info</a></li>
-      <li class="btn delete"><a href="/catFindNewHome/${
-        cat.id
-      }">New Home</a></li>
+      <li class="btn delete"><a href="/catFindNewHome/${cat.id}">New Home</a></li>
   </ul>
 </li>`;
 }
