@@ -3,27 +3,10 @@ const fs = require("fs");
 const formidable = require("formidable");
 const urll = require("url");
 const path = require("path");
+const editCat = require('./utils')
 
 const server = http.createServer(async (req, res) => {
   const url = urll.parse(req.url).pathname;
-
-  if(url.startsWith("/Users/georgi1141/Desktop/SoftUni/JSWeb-May-2023/JSBack-End-May-2023/Intro-to-Node.js/cat-shalter/resources/content/images/") && url.endsWith("jpg") || url.endsWith("jpeg") || url.startsWith("png")) {
-    
-    fs.readFile(url, function(err,data) {
-      if (err) throw err;
-      res.writeHead(200, {
-        "Content-Type": "image/jpeg"
-      });
-
-      res.write(data)
-      res.end()
-      
-      
-      
-      
-    });
-
-  }
 
   if (url == "/addCat") {
     const form = new formidable.IncomingForm();
@@ -81,7 +64,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // get breed and push it in the array
-  else if (req.method === "POST") {
+  else if (req.method === "POST" && req.url === "/addCat") {
     let body = "";
     req.on("data", (chunk) => {
       body += chunk.toString(); // convert Buffer to string
@@ -158,9 +141,66 @@ const server = http.createServer(async (req, res) => {
     });
   } else if (url.includes("/catEdit")) {
     const id = Number(url.split("/").pop());
-    console.log(id);
 
-    res.end();
+    fs.readFile(
+      "./resources/views/editCat.html",
+      "utf8",
+      function (err, htmlData) {
+        if (err) throw err;
+
+        fs.readFile("./cats.json", "utf8", function (err, cats) {
+          if (err) throw err;
+          const parseCats = JSON.parse(cats);
+
+          let catToEdit = parseCats.filter((x) => x.id === id);
+
+          const htmlEdit = editCat(catToEdit[0]);
+          const final = htmlData.replace("{{catInfo}}", htmlEdit);
+
+          res.writeHead(200, { "Content-Type": "text/html" });
+
+          res.write(final);
+
+          res.end();
+        });
+      }
+    );
+  } else if (url.includes("/catToEdit") && req.method == "POST") {
+    const id = Number(url.split("/").pop());
+
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, files) => {
+      if (err) throw err;
+
+      const name = fields.name;
+      const description = fields.description;
+      const breed = fields.breed;
+
+      fs.readFile("./cats.json", "utf8", (err, data) => {
+        if (err) throw err;
+        const cats = JSON.parse(data);
+
+        let final = [];
+        cats.forEach((cat) => {
+          if (Number(cat.id) == Number(id)) {
+            cat.name = name;
+            cat.description = description;
+            cat.breed = breed;
+          }
+          final.push(cat);
+        });
+
+        fs.writeFile("./cats.json", JSON.stringify(final), (err) => {
+          if (err) throw err;
+
+          console.log("File updated successfully");
+
+          res.writeHead(302, { Location: "/" });
+          res.end();
+        });
+      });
+    });
   } else if (url.includes("/catFindNewHome")) {
     const id = Number(url.split("/").pop());
 
@@ -210,7 +250,7 @@ function createBreedHtml(args) {
 }
 
 function createCat(cat) {
-  const absolute = path.resolve(__dirname,'resources','content','images',cat.image)
+  const absolute = path.resolve(__dirname, "resources", "content", "images");
   return `  <li id=${cat.id}>
   <img src="${absolute}" alt="${cat.name}">
   <h3>${cat.name}</h3>
@@ -222,3 +262,4 @@ function createCat(cat) {
   </ul>
 </li>`;
 }
+
