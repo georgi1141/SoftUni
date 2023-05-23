@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Emil",
+    "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho.",
+    "image": "https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg",
+    "breed": "American Bobtail Cat"
+  },
+  {
+    "id": 2,
+    "name": "Thomas",
+    "description": "The cat's independent personality, grace, cleanliness, and subtle displays of affection have wide appeal. Typically, cats are creatures of habit; they are inquisitive, but not adventurous, and are easily upset by sudden changes of routine.",
+    "image": "https://cdn.pixabay.com/photo/2015/06/19/14/20/cat-814952_1280.jpg",
+    "breed": "Unknown breed"
+  }
+]
