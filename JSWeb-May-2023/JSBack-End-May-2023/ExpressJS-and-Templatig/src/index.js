@@ -1,7 +1,11 @@
 const express = require('express');
+const path = require('path');
 const handlebars = require('express-handlebars');
 const port = 3000
 const app = express();
+
+// express config
+app.use(express.static(path.resolve(__dirname,'static')))
 
 // setting up handlebars template engine
 app.engine('hbs',handlebars.engine({
