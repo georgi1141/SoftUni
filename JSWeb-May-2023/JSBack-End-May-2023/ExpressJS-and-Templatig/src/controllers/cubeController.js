@@ -3,6 +3,8 @@ const cubeService = require('../services/cubeService')
 
 
 router.get('/create',(req,res)=>{
+
+
     res.render('create')
 })
 router.post('/create',(req,res)=>{
