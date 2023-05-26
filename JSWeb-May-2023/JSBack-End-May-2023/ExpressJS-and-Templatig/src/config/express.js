@@ -1,13 +1,11 @@
 const express = require('express');
-const handlebars = require('express-handlebars');
-const bodyParser = require('body-parser');
+const path = require('path');
 
-module.exports = (app) => {
+function expressConfig(app){
+// express config
+app.use(express.static(path.resolve(__dirname,'../static')))
+app.use(express.urlencoded({extended:false}))
     
-    //TODO: Setup the view engine
+}
 
-    //TODO: Setup the body parser
-
-    //TODO: Setup the static files
-
-};
+module.exports = expressConfig;
