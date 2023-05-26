@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const cubeService = require('../services/cubeService')
 
 
 router.get('/create',(req,res)=>{
@@ -6,8 +7,11 @@ router.get('/create',(req,res)=>{
 })
 router.post('/create',(req,res)=>{
 
-    console.log(req.body)
-    
+    const {name,description,imageUrl,difficultyLevel} = req.body
+
+    cubeService.createCube({name,description,imageUrl,difficultyLevel})
+
+
     res.redirect('/')
 
 });
