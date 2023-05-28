@@ -12,6 +12,9 @@ hbsConfig(app)
 
 app.use(homeControler)
 app.use('/cubes',cubeController)
+app.get('*',(req,res)=>{
+    res.render('404')
+})
 
 
 
