@@ -6,3 +6,11 @@ exports.create = (accessoryData)=>{
 
 
 }
+
+exports.getAll = async ()=>{
+
+   let res = await Accessory.find().lean()
+
+   return res
+
+}
