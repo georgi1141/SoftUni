@@ -13,11 +13,15 @@ router.post("/create", async (req, res) => {
   res.redirect("/");
 });
 
+
+
+
 router.get('/:cubeID/details', async(req, res) =>{
     const id = req.params.cubeID
     const cube = await cubeService.getOneCube(id)
     res.render('details',{cube})
   })
+
 
 
   router.get('/:cubeID/attach-accessory', async(req, res) =>{
