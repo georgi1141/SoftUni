@@ -22,15 +22,16 @@ router.get('/:cubeID/details', async(req, res) =>{
     res.render('details',{cube})
   })
 
-
+ 
 
   router.get('/:cubeID/attach-accessory', async(req, res) =>{
     const id = req.params.cubeID
 
     const cube = await cubeService.getOneCube(id)
     const accessoryOptions = await accessoryService.getAll()
+    const hasAccesories = accessoryOptions.length >0
 
-    res.render('accessories/attachAccessory',{cube,accessoryOptions})
+    res.render('accessories/attachAccessory',{cube,accessoryOptions,hasAccesories})
   })
 
 
