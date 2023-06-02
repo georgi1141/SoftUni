@@ -2,9 +2,8 @@ const express = require('express');
 const port = 3000
 const app = express();
 const dbConnect = require('./config/dbConfig')
+const routes = require('./routes')
 
-const homeControler = require('./controllers/homeController')
-const cubeController = require('./controllers/cubeController')
 
 const expressConfig = require('./config/express')
 expressConfig(app)
@@ -17,12 +16,9 @@ hbsConfig(app)
  .then(()=>console.log('DB connected'))
  .catch(err=>console.log(`DB error ${err}`))
 
+ app.use(routes)
 
-app.use(homeControler)
-app.use('/cubes',cubeController)
-app.get('*',(req,res)=>{
-    res.render('404')
-})
+
 
 
 
