@@ -15,3 +15,5 @@ exports.getAll = async ()=>{
 
 }
 
+exports.getOthers = (accessoryIDs)=> Accessory.find({_id: {$nin:accessoryIDs}})
+
