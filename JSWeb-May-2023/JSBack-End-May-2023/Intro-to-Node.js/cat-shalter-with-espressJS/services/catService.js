@@ -18,3 +18,14 @@ exports.deteleCat = async (id)=>{
 exports.getOne = async (id)=>{
     return await Cat.findById(id).lean()
 }
+
+exports.updateCat = async(id,data)=>{
+
+        await Cat.findByIdAndUpdate(id,{
+            name:data.name,
+            description:data.description,
+            image:data.image,
+            breed:data.breed
+        })
+
+}

@@ -9,24 +9,28 @@ router.post("/addCat", async (req, res) => {
   res.redirect("/");
 });
 
-router.get('/:catID/deleteCat',async (req,res)=>{
+router.get("/:catID/deleteCat", async (req, res) => {
+  const id = req.params.catID;
 
-    const id = req.params.catID
-    
-    await catService.deteleCat(id)
-    res.redirect('/')
+  await catService.deteleCat(id);
+  res.redirect("/");
+});
 
-})
+router.get("/:catID/editCat", async (req, res) => {
+  const id = req.params.catID;
 
-router.get('/:catID/editCat',async (req,res)=>{
+  const data = await catService.getOne(id);
 
-  const id = req.params.catID
+  res.render("editCat", { data });
+});
 
-  const data = await catService.getOne(id)
+router.post("/:catID/editCat", async (req, res) => {
+  const data = req.body;
+  const id = req.params.catID;
 
+  await catService.updateCat(id, data);
 
-    res.render('editCat',{data})
-
-})
+  res.redirect("/");
+});
 
 module.exports = router;
