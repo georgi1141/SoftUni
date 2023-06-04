@@ -1,8 +1,12 @@
 const router = require("express").Router();
 const breedService = require('../services/breedService')
+const catService = require('../services/catService')
 
-router.get("/", (req, res) => {
-  res.render("mainPage");
+router.get("/", async (req, res) => {
+
+  const allCats = await catService.getAll()
+
+  res.render("mainPage",{allCats});
 });
 
 router.get("/addBreed", (req, res) => {
@@ -12,7 +16,7 @@ router.get("/addBreed", (req, res) => {
 router.get("/addCat", async (req, res) => {
 
   const breeds = await breedService.getAll()
-  
+
   res.render("addCat",{breeds});
 });
 

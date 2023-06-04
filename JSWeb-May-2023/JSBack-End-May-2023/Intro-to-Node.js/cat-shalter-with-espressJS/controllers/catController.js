@@ -1,17 +1,32 @@
-const router = require('express').Router()
-const catService = require('../services/catService')
+const router = require("express").Router();
+const catService = require("../services/catService");
 
+router.post("/addCat", async (req, res) => {
+  const { name, description, upload, breed } = req.body;
 
+  await catService.create({ name, description, image: upload, breed });
 
-router.post('/addCat',async (req,res)=>{
+  res.redirect("/");
+});
 
-    const {name,description,upload,breed} = req.body
+router.get('/:catID/deleteCat',async (req,res)=>{
 
-
-    await catService.create({name,description,image:upload,breed})
-
+    const id = req.params.catID
+    
+    await catService.deteleCat(id)
     res.redirect('/')
 
 })
 
-module.exports = router
+router.get('/:catID/editCat',async (req,res)=>{
+
+  const id = req.params.catID
+
+  const data = await catService.getOne(id)
+
+
+    res.render('editCat',{data})
+
+})
+
+module.exports = router;

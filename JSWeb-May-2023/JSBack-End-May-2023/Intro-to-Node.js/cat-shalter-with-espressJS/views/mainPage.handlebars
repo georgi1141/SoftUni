@@ -19,8 +19,8 @@
 <main>
   <section class="cats">
     <ul>
-      {{#if data}}
-        {{#each data}}
+      {{#if allCats}}
+        {{#each allCats}}
      <li>
         <img
           src={{image}}
@@ -30,8 +30,8 @@
         <p><span>Breed: </span>{{breed}}</p>
         <p><span>Description: </span>{{description}}</p>
         <ul class="buttons">
-          <li class="btn edit"><a href="/editCat/{{id}}">Change Info</a></li>
-          <li class="btn delete"><a href="/deleteCat/{{id}}">New Home</a></li>
+          <li class="btn edit"><a href="/{{_id}}/editCat">Change Info</a></li>
+          <li class="btn delete"><a href="/{{_id}}/deleteCat">New Home</a></li>
         </ul>
       </li>
   {{/each}}
