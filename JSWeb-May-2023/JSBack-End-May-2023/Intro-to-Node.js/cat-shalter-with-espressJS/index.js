@@ -9,7 +9,11 @@ expressConfig.attachToExpress(app)
 handlebarsConfig.hbsConfig(app)
 
 const homeController = require('./controllers/homeController')
+const breedController = require('./controllers/breedController')
+const catController = require('./controllers/catController')
 app.use(homeController)
+app.use(breedController)
+app.use(catController)
 
 
 
