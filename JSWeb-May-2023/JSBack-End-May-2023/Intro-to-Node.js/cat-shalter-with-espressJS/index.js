@@ -1,12 +1,15 @@
 const express = require("express");
-const app = express();
 const dbConfig = require('./config/dbConfig')
-dbConfig.connectToDB()
 const expressConfig = require('./config/expressConfig')
-expressConfig.attachToExpress(app)
 const handlebarsConfig = require('./config/handlebarsConfig')
+
+const app = express();
+dbConfig.connectToDB()
+expressConfig.attachToExpress(app)
 handlebarsConfig.hbsConfig(app)
 
+const homeController = require('./controllers/homeController')
+app.use(homeController)
 
 
 
