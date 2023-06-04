@@ -14,3 +14,4 @@ exports.getAll = async ()=>{
    return res
 
 }
+

@@ -18,7 +18,15 @@ exports.getAll = async (search, from, to) => {
   return result;
 };
 
-exports.getOneCube = (id) => Cube.findById(id).lean();
+exports.getOneCube = (id) => Cube.findById(id).populate('accessories').lean();
+
+exports.attach = async (cubeID,accesoryID)=>{
+
+return Cube.findByIdAndUpdate(cubeID,{$push:{accessories:accesoryID}})
+
+
+
+}
 
 exports.createCube = async (cubeData) => {
 
