@@ -22,7 +22,9 @@ router.post("/create", async (req, res) => {
 router.get("/:cubeID/details", async (req, res) => {
   const id = req.params.cubeID;
   const cube = await cubeService.getOneCube(id);
-  res.render("details", { cube});
+  const isOwner = cube.owner == req.user._id
+  
+  res.render("details", { cube,isOwner});
 });
 
 router.get("/:cubeID/attach-accessory", async (req, res) => {
