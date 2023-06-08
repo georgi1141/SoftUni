@@ -30,4 +30,9 @@ const cube = new Cube(cubeData)
   return cube
 };
 
+exports.editCube = async (cubeID,data)=>{
+  return await Cube.findByIdAndUpdate(cubeID,data)
+}
+
+
 exports.deleteCube =(cubeID)=>Cube.findByIdAndDelete(cubeID)

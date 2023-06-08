@@ -62,14 +62,27 @@ router.get('/:cubeID/delete',async (req,res)=>{
 
 router.post('/:cubeID/delete',async (req,res)=>{
   const id = req.params.cubeID
-  const cube = await cubeService.getOneCube(id)
-
-
-
     await cubeService.deleteCube(id)
-
     res.redirect('/')
+})
+
+router.get('/:cubeID/edit',async (req,res)=>{
+  const id = req.params.cubeID
+
+  const cube = await cubeService.getOneCube(id)
+  res.render('cube/edit',{cube})
 
 })
+
+router.post('/:cubeID/edit',async (req,res)=>{
+  const id = req.params.cubeID
+  const {name,imageUrl,description,difficultyLevel} = req.body
+
+  await cubeService.editCube(id,{name,imageUrl,description,difficultyLevel})
+  
+
+  res.redirect(`/cubes/${id}/details`)
+})
+
 
 module.exports = router;
