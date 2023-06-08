@@ -51,4 +51,13 @@ router.post("/:cubeID/attach-accessory", async (req, res) => {
   
 })
 
+router.get('/:cubeID/delete',async (req,res)=>{
+  const id = req.params.cubeID
+
+  const cube = await cubeService.getOneCube(id)
+
+  res.render('cube/delete',{cube})
+
+})
+
 module.exports = router;
