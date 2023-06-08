@@ -21,17 +21,13 @@ exports.getAll = async (search, from, to) => {
 exports.getOneCube = (id) => Cube.findById(id).populate('accessories').lean();
 
 exports.attach = async (cubeID,accesoryID)=>{
-
 return Cube.findByIdAndUpdate(cubeID,{$push:{accessories:accesoryID}})
-
-
-
 }
 
 exports.createCube = async (cubeData) => {
-
 const cube = new Cube(cubeData)
   await cube.save()
   return cube
-
 };
+
+exports.deleteCube =(cubeID)=>Cube.findByIdAndDelete(cubeID)
