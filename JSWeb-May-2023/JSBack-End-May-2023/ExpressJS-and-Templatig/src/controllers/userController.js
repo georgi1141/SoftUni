@@ -3,12 +3,13 @@ const userService = require('../services/userService')
 
 
 
+
+
 router.get('/register',(req,res)=>{
     res.render('auth/registerPage')
 })
 router.post('/register',async (req,res)=>{
     const {username,password,repeatPassword} = req.body
-    console.log(password,repeatPassword)
 
     await userService.register({username,password,repeatPassword} )
 
@@ -24,9 +25,9 @@ router.get('/login',(req ,res)=>{
 router.post('/login',async (req,res)=>{
 const {username,password} = req.body
 
-const user = await userService.login(username,password)
+const token = await userService.login(username,password)
 
-console.log(user)
+res.cookie('auth',token,{httpOnly:true})
 
 res.redirect('/')
 

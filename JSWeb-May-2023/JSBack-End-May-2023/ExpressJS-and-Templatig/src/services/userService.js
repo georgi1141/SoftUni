@@ -1,5 +1,7 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('../lib/jwt')
+const config = require('../config/config')
 
 exports.register = (userData)=>User.create(userData)
 
@@ -16,7 +18,13 @@ exports.login = async (username,password)=>{
         throw new Error('Can not find username or password!')
     }
 
-    return user
+    const payload = {
+        _id:user._id,
+        username:user.username
+    }
+    const token = await jwt.sign(payload,config.secret)
+
+    return token
 
 
 }
