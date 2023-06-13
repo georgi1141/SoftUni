@@ -26,6 +26,13 @@
         {{/if}}
       </ul>
     </header>
+    {{#if firstError}}
+    <div id="notifications">
+      <p id="notification-messgae">{{firstError}}</p>
+
+    </div>
+
+    {{/if}}
     {{{body}}}
    </div>
     </main>

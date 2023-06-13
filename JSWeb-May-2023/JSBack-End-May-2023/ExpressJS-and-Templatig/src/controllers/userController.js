@@ -8,10 +8,19 @@ router.get('/register',(req,res)=>{
 router.post('/register',async (req,res)=>{
     const {username,password,repeatPassword} = req.body
 
-    await userService.register({username,password,repeatPassword} )
+    try {
+
+        await userService.register({username,password,repeatPassword} )
 
 
-    res.redirect('/user/login')
+        res.redirect('/user/login')
+        
+    } catch (error) {
+        const firstError = Object.values(error.errors)[0].message
+        res.render('auth/registerPage',{firstError})
+        
+    }
+
 
 })
 
