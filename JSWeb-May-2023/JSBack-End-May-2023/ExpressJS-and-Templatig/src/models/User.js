@@ -2,9 +2,23 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
-    username:String,
+    username:{
+        type:String,
+        required:[true,'Username required!'],
+        minLength:[5,'Minimum user length must be longer than 5 symbols!'],
+        unique:true,
+        validate:{
+            validator:function(value){
+                return /^[A-Za-z0-9]+$/.test(value)
+            },
+            message:'Username must consist of only English letters and digits'
+        }
+    },
     password:{
-        type:String
+        type:String,
+        required:[true,'Password required!'],
+        minLength:[8,'Passowrd must be at least 8 characters!'],
+        match: [/^[A-Za-z0-9]+$/,'Passowrd must consist of only English letters and digits']
     }
 })
 
