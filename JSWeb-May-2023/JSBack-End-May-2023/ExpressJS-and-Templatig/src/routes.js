@@ -13,7 +13,7 @@ router.use('/user',userController)
 router.get('*',(req,res)=>{
     res.render('404')
 })
-
+ 
 
 
 module.exports = router

@@ -1,0 +1,1 @@
+exports.SECRET = 'SoftUni forever!'
