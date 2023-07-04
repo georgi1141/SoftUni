@@ -1,0 +1,9 @@
+<div>{{title}}</div>
+<div>
+    <input #nameValue type="text" placeholder="Name" >
+    <input #ageValue type="number" placeholder="Age" >
+    <button (click)="addUser(nameValue,ageValue)" >Add User</button>
+</div>
+<div>
+    <app-users-list [users]="users"/>
+</div>
