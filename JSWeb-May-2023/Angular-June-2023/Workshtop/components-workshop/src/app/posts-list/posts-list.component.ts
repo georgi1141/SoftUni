@@ -10,6 +10,7 @@ import { Post } from '../types/post';
 export class PostsListComponent implements OnInit{
 
   postLists:Post[] = []
+  isLoading:boolean = true
 
   constructor(private apiService: ApiService){
 
@@ -18,6 +19,7 @@ export class PostsListComponent implements OnInit{
 
   ngOnInit(): void {
     this.apiService.getPosts().subscribe(posts=>{
+      this.isLoading=false
       this.postLists = posts
     })
   }
