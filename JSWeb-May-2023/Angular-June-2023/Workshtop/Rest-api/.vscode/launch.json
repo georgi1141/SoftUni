@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/JSWeb-May-2023/Angular-June-2023/Workshtop/Rest-api/index.js"
+            "program": "${workspaceFolder}/index.js"
         }
     ]
 }
