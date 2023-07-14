@@ -3,21 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthActivity } from '../core/guards/auth.activate';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [{
   path:'login',
-  component: LoginComponent,canActivate:[AuthActivity]
+  component: LoginComponent
 
 },{
   path:'register',
-  component: RegisterComponent,canActivate:[AuthActivity]
+  component: RegisterComponent
 },{
   path:'profile',
-  component: RegisterComponent,canActivate:[AuthActivity]
+  component: ProfileComponent,canActivate:[AuthActivity]
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class UserRoutingModule { } 

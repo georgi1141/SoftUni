@@ -3,7 +3,7 @@ import {UserId} from './UserId'
 interface ThemeId {
     
         "subscribers": string[],
-        "posts": string[],
+        "posts": any,
         "_id": string,
         "themeName": string,
         "userId": string,

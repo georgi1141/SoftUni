@@ -19,7 +19,8 @@ component:ThemesListComponent},{
 
 },{
   path:'new-theme',
-  component: NewThemeComponent,canActivate:[AuthActivity]
+  component: NewThemeComponent,
+  canActivate:[AuthActivity]
 }];
 
 @NgModule({

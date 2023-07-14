@@ -10,12 +10,20 @@ import{HttpClientModule} from '@angular/common/http'
 import { SharedModule } from './shared/shared.module';
 import { UserRoutingModule } from './user/user-routing.module';
 import { ThemeModule } from './theme/theme.module';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThemesListComponent,
-    PostsListComponent
+    PostsListComponent,
+    WelcomeComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +32,7 @@ import { ThemeModule } from './theme/theme.module';
     HttpClientModule,
     SharedModule,
     UserRoutingModule,
-    ThemeModule
+    ThemeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

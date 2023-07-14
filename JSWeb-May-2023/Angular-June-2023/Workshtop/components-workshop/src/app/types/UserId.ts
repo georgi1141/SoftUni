@@ -1,6 +1,6 @@
 export interface UserId{
     "themes": string[],
-    "posts": string[],
+    "posts": any,
     "_id": string,
     "tel": string,
     "email": string,

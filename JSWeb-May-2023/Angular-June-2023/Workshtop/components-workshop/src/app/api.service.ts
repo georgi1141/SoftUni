@@ -20,4 +20,11 @@ export class ApiService {
     return this.http.get<Post[]>(`${appUrl}/posts${limit ? `?limit=${limit}`:''}`);
   }
 
+  getCurrentTheme(postId:string){
+    const { appUrl } = environment;
+
+    return this.http.get<Theme>(`${appUrl}/themes/${postId}`);
+
+  }
+
 }
