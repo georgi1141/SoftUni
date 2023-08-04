@@ -1,4 +1,4 @@
-import { get, post } from "../data/api.js"
+import { get, post } from "./api.js"
 
 
 const itemName = 'userData'

@@ -1,4 +1,4 @@
-import { html } from "../../node_modules/lit-html/lit-html.js";
+import { html } from "lit-html";
 import { del,post } from "../data/api.js";
 import { getBookDetails, getLikes, getLikesCount, getUserData } from "../data/utility.js";
 

@@ -1,4 +1,4 @@
-import { html } from "../../node_modules/lit-html/lit-html.js";
+import { html } from "lit-html";
 import { put } from "../data/api.js";
 import { getBookDetails } from "../data/utility.js";
 

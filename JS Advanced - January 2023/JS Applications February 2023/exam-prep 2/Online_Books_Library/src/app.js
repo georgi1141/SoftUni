@@ -1,4 +1,4 @@
-import page from '../node_modules/page/page.mjs'
+import page from 'page/page.mjs'
 import { attatchRender } from './middlewares/attachRenderToCtx.js'
 import {addBookView } from './views/addBook.js'
 import { dashView } from './views/dashView.js'

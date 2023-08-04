@@ -1,4 +1,4 @@
-import { html } from "../../node_modules/lit-html/lit-html.js";
+import { html } from "lit-html";
 import { getUserData, recordBook } from "../data/utility.js";
 
 const addBookTemplate = (createBook) => html`

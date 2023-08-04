@@ -1,4 +1,4 @@
-import page from '../node_modules/page/page.mjs'
+import page from 'page/page.mjs'
 import { logout } from './data/auth.js'
 import { deleteOffer } from './data/utility.js'
 import { decorateCtx } from './middlewares/ctxMiddleware.js'

@@ -1,6 +1,6 @@
-import { html } from "../../node_modules/lit-html/lit-html.js";
+import { html } from "lit-html";
 import { logout } from "../data/auth.js";
-import page from '../../node_modules/page/page.mjs'
+import page from 'page/page.mjs'
 
 async function logoutUser(){
   page.redirect('/')
