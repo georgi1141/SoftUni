@@ -8,7 +8,7 @@ export function getUserData(){
 
 }
 
-export function setUserData(data){
+export function setUserData(data){ 
     return localStorage.setItem(itemName,JSON.stringify(data))
 
 }
