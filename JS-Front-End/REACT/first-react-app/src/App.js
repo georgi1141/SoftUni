@@ -1,4 +1,5 @@
 import './App.css';
+import { Book } from './components/Book';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
@@ -7,6 +8,8 @@ function App() {
   return (
   
    <div>
+
+    <Book title="The Prisoner" />
   
 <Header/>
 
