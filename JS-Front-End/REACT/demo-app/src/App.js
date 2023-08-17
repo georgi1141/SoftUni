@@ -1,10 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-import { Counter } from './components/Counter';
+import "./App.css";
+import { Footer } from "./components/Footer";
+import Header from "./components/Header";
+import TodoList from "./components/TodoList"
+
 
 function App() {
+
+
+
+
   return (
-    <Counter initialCount={1}/>
+    <div>
+      <Header />
+
+      <main className="main">
+       <TodoList/>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
