@@ -1,0 +1,32 @@
+body{
+padding: 20px;
+margin: 0;
+}
+div{
+    padding: 0;
+    margin: 0;
+}
+
+
+section.card{
+    padding: 0;
+    display: block;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.card>div>img{
+    padding: 0;
+    width: 100%;
+}
+div>a{
+    color: aliceblue;
+    background-color: #7adb7a;
+    text-decoration: none;
+}
+h3{
+    padding: 0;
+    margin: 0;
+}
