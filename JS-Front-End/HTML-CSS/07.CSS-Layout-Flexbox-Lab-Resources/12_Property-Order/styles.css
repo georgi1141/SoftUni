@@ -7,14 +7,17 @@
 }
 
 #box1 {
+  order: 2;
   background-color: pink;
 }
 
 #box2 {
+  order: 0;
   background-color: lightgreen;
 }
 
 #box3 {
+  order: 1;
   background-color: lightblue;
 }
 
