@@ -1,0 +1,89 @@
+/* Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+
+
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:  Poppins, sans-serif;
+}
+
+.container-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+.container-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-header header{
+    font-weight: 600;
+
+}
+.container-header header span{
+    color: #00a2ff;
+}
+.container-header p{
+    font-size: 0.5em;
+}
+
+.container-cards{
+    margin: 1em 4em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+
+}
+
+
+img{
+    display: block;
+    width: 100%;
+    height: auto;
+    
+}
+
+.card{
+    flex:1 1 30%;
+    height: auto;
+    background-color:rgb(102, 131, 154);
+    color: black;
+
+}
+.card, img{
+    display: block;
+    overflow: hidden;
+    border-radius: 20px;
+
+}
+
+.card-header{
+    margin: 1em ;
+    font-weight: 500;
+}
+.card-text{
+    margin: 1em;
+}
+
+button{
+    margin: 1em 2em;
+    padding: 0.2em 0.8em;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background-color: #00a2ff;
+    border: 1px solid blue;
+    outline: 1px solid white;
+    border-radius: 2em;
+}
+
+
+
