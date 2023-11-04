@@ -1,56 +1,13 @@
 import React from 'react'
 import UserList from './UserList'
+import Search from './Search'
 
 function Main() {
   return (
     <main className="main">
     {/* Section component  */}
     <section className="card users-container">
-      {/* Search bar component */}
-      <form className="search-form">
-        <h2>
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            data-prefix="fas"
-            data-icon="user"
-            className="svg-inline--fa fa-user SearchBar_icon__cXpTg"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-          >
-            <path
-              fill="currentColor"
-              d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"
-            ></path>
-          </svg>
-          <span>Users</span>
-        </h2>
-        <div className="search-input-container">
-          <input
-            type="text"
-            placeholder="Please, select the search criteria"
-            name="search"
-          />
-          {/* Show the clear button only if input field length !== 0 */}
-          <button className="btn close-btn">
-            <i className="fa-solid fa-xmark" />
-          </button>
-          <button className="btn" title="Please, select the search criteria">
-            <i className="fa-solid fa-magnifying-glass" />
-          </button>
-        </div>
-        <div className="filter">
-          <span>Search Criteria:</span>
-          <select name="criteria" className="criteria">
-            <option value="">Not selected</option>
-            <option value="">First Name</option>
-            <option value="">Last Name</option>
-            <option value="">Email</option>
-            <option value="">Phone</option>
-          </select>
-        </div>
-      </form>
+      <Search/>
       {/* Table component */}
       <div className="table-wrapper">
         {/* Overlap components  */}
@@ -120,10 +77,9 @@ function Main() {
         <UserList/>
         
       </div>
-      {/* New user button  */}
-      <button className="btn-add btn">Add new user</button>
+      
       {/* Pagination component  */}
-      <div className="pagination position">
+      {/* <div className="pagination position">
         <div className="limits">
           <span>Items per page:</span>
           <select name="limit" className="limit" value={5}>
@@ -204,7 +160,7 @@ function Main() {
             </svg>
           </button>
         </div>
-      </div>
+      </div> */}
     </section>
     {/* User details component  */}
     {/* <div class="overlay">
@@ -266,14 +222,14 @@ function Main() {
       <form>
         <div class="form-row">
           <div class="form-group">
-            <label for="firstName">First name</label>
+            <label htmlFor="firstName">First name</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-user"></i></span>
               <input id="firstName" name="firstName" type="text" />
             </div>
           </div>
           <div class="form-group">
-            <label for="lastName">Last name</label>
+            <label htmlFor="lastName">Last name</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-user"></i></span>
               <input id="lastName" name="lastName" type="text" />
@@ -283,14 +239,14 @@ function Main() {
   
         <div class="form-row">
           <div class="form-group">
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-envelope"></i></span>
               <input id="email" name="email" type="text" />
             </div>
           </div>
           <div class="form-group">
-            <label for="phoneNumber">Phone number</label>
+            <label htmlFor="phoneNumber">Phone number</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-phone"></i></span>
               <input id="phoneNumber" name="phoneNumber" type="text" />
@@ -299,7 +255,7 @@ function Main() {
         </div>
   
         <div class="form-group long-line">
-          <label for="imageUrl">Image Url</label>
+          <label htmlFor="imageUrl">Image Url</label>
           <div class="input-wrapper">
             <span><i class="fa-solid fa-image"></i></span>
             <input id="imageUrl" name="imageUrl" type="text" />
@@ -308,14 +264,14 @@ function Main() {
   
         <div class="form-row">
           <div class="form-group">
-            <label for="country">Country</label>
+            <label htmlFor="country">Country</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-map"></i></span>
               <input id="country" name="country" type="text" />
             </div>
           </div>
           <div class="form-group">
-            <label for="city">City</label>
+            <label htmlFor="city">City</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-city"></i></span>
               <input id="city" name="city" type="text" />
@@ -325,14 +281,14 @@ function Main() {
   
         <div class="form-row">
           <div class="form-group">
-            <label for="street">Street</label>
+            <label htmlFor="street">Street</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-map"></i></span>
               <input id="street" name="street" type="text" />
             </div>
           </div>
           <div class="form-group">
-            <label for="streetNumber">Street number</label>
+            <label htmlFor="streetNumber">Street number</label>
             <div class="input-wrapper">
               <span><i class="fa-solid fa-house-chimney"></i></span>
               <input id="streetNumber" name="streetNumber" type="text" />
