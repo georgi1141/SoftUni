@@ -2,6 +2,15 @@ import React from 'react'
 
 function SingleUser({user,deleteUser}) {
 
+  function parseISOStringToDateString(isoString) {
+    const dateObject = new Date(isoString);
+    const year = dateObject.getUTCFullYear();
+    const month = dateObject.getUTCMonth() + 1; // Months are zero-based, so add 1
+    const day = dateObject.getUTCDate();
+  
+    return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+  }
+
 
 
   return (
@@ -17,7 +26,7 @@ function SingleUser({user,deleteUser}) {
           <td>{user.lastName}</td>
           <td>{user.email}</td>
           <td>{user.phoneNumber}</td>
-          <td>{user.createdAt.slice(0,user.createdAt.indexOf("T"))}</td>
+          <td>{parseISOStringToDateString(user.createdAt)}</td>
           <td className="actions">
             <button className="btn edit-btn" title="Edit">
               <svg

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SingleUser from "./SingleUser";
-import { getAllUsers } from "../services/userService";
+import { getAllUsers,deleteUserFromDb } from "../services/userService";
 import CreateUserModal from "./CreateUserModal";
 
 function UserList() {
@@ -14,11 +14,8 @@ function UserList() {
     }, []);
 
 async function deleteUser(userId) {
-    try {
-    } catch (error) {
-        alert(error.message);
-    }
     setUsers((users) => users.filter((user) => user._id !== userId));
+    // deleteUserFromDb(userId)
 }
 
 function createUserHandler(){
@@ -29,6 +26,12 @@ function disableBtn(){
     setShowBtn(false)
 
 }
+
+function updateUsersInUI(){
+    getAllUsers().then((result) => setUsers(result));
+}
+
+
 
     return (
         <>
@@ -139,7 +142,7 @@ function disableBtn(){
             </table>
 
             <button onClick={createUserHandler} className="btn-add btn">Add new user</button>
-            {showBtn && <CreateUserModal disableBtn={disableBtn}/>}
+            {showBtn && <CreateUserModal updateUsersInUI={updateUsersInUI} disableBtn={disableBtn}/>}
         </>
     );
 }

@@ -1,47 +1,91 @@
+import { useState } from "react";
+import { createUser } from "../services/userService";
 
-function CreateUserModal({ disableBtn }) {
-
+function CreateUserModal({ disableBtn, updateUsersInUI }) {
   const handleKeyPress = (event) => {
-    
-    if (event.key === 'Escape') {
-      console.log('Esc pressed!')
-      disableBtn()
+    if (event.key === "Escape") {
+      disableBtn();
     }
+  };
+
+  const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    imageUrl: "",
+    country: "",
+    city: "",
+    street: "",
+    streetNumber: "",
+  });
+
+  function handleOnChange(e) {
+    setValues({ ...values, [e.target.name]: e.target.value });
   }
 
-
-
+  async function onSubmitHandler(e) {
+    e.preventDefault();
+    disableBtn();
+    const result = await createUser(values);
+    updateUsersInUI(result);
+  }
 
   return (
-    <div onKeyDown={handleKeyPress} className="overlay" >
+    <div onKeyDown={handleKeyPress} className="overlay">
       <div className="backdrop" onClick={disableBtn}></div>
       <div className="modal">
         <div className="user-container">
           <header className="headers">
             <h2>Add User</h2>
             <button onClick={disableBtn} className="btn close">
-              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
-                className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path fill="currentColor"
-                  d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z">
-                </path>
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                data-icon="xmark"
+                className="svg-inline--fa fa-xmark"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
+                ></path>
               </svg>
             </button>
           </header>
-          <form>
+          <form onSubmit={onSubmitHandler}>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-user"></i></span>
-                  <input id="firstName" name="firstName" type="text" />
+                  <span>
+                    <i className="fa-solid fa-user"></i>
+                  </span>
+                  <input
+                    value={values.firstName}
+                    onChange={handleOnChange}
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="lastName">Last name</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-user"></i></span>
-                  <input id="lastName" name="lastName" type="text" />
+                  <span>
+                    <i className="fa-solid fa-user"></i>
+                  </span>
+                  <input
+                    value={values.lastName}
+                    onChange={handleOnChange}
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                  />
                 </div>
               </div>
             </div>
@@ -50,15 +94,31 @@ function CreateUserModal({ disableBtn }) {
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-envelope"></i></span>
-                  <input id="email" name="email" type="text" />
+                  <span>
+                    <i className="fa-solid fa-envelope"></i>
+                  </span>
+                  <input
+                    value={values.email}
+                    onChange={handleOnChange}
+                    id="email"
+                    name="email"
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">Phone number</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-phone"></i></span>
-                  <input id="phoneNumber" name="phoneNumber" type="text" />
+                  <span>
+                    <i className="fa-solid fa-phone"></i>
+                  </span>
+                  <input
+                    value={values.phoneNumber}
+                    onChange={handleOnChange}
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    type="text"
+                  />
                 </div>
               </div>
             </div>
@@ -66,8 +126,16 @@ function CreateUserModal({ disableBtn }) {
             <div className="form-group long-line">
               <label htmlFor="imageUrl">Image Url</label>
               <div className="input-wrapper">
-                <span><i className="fa-solid fa-image"></i></span>
-                <input id="imageUrl" name="imageUrl" type="text" />
+                <span>
+                  <i className="fa-solid fa-image"></i>
+                </span>
+                <input
+                  value={values.imageUrl}
+                  onChange={handleOnChange}
+                  id="imageUrl"
+                  name="imageUrl"
+                  type="text"
+                />
               </div>
             </div>
 
@@ -75,15 +143,31 @@ function CreateUserModal({ disableBtn }) {
               <div className="form-group">
                 <label htmlFor="country">Country</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-map"></i></span>
-                  <input id="country" name="country" type="text" />
+                  <span>
+                    <i className="fa-solid fa-map"></i>
+                  </span>
+                  <input
+                    value={values.country}
+                    onChange={handleOnChange}
+                    id="country"
+                    name="country"
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="city">City</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-city"></i></span>
-                  <input id="city" name="city" type="text" />
+                  <span>
+                    <i className="fa-solid fa-city"></i>
+                  </span>
+                  <input
+                    value={values.city}
+                    onChange={handleOnChange}
+                    id="city"
+                    name="city"
+                    type="text"
+                  />
                 </div>
               </div>
             </div>
@@ -92,21 +176,44 @@ function CreateUserModal({ disableBtn }) {
               <div className="form-group">
                 <label htmlFor="street">Street</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-map"></i></span>
-                  <input id="street" name="street" type="text" />
+                  <span>
+                    <i className="fa-solid fa-map"></i>
+                  </span>
+                  <input
+                    value={values.street}
+                    onChange={handleOnChange}
+                    id="street"
+                    name="street"
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <label htmlFor="streetNumber">Street number</label>
                 <div className="input-wrapper">
-                  <span><i className="fa-solid fa-house-chimney"></i></span>
-                  <input id="streetNumber" name="streetNumber" type="text" />
+                  <span>
+                    <i className="fa-solid fa-house-chimney"></i>
+                  </span>
+                  <input
+                    value={values.streetNumber}
+                    onChange={handleOnChange}
+                    id="streetNumber"
+                    name="streetNumber"
+                    type="text"
+                  />
                 </div>
               </div>
             </div>
             <div id="form-actions">
-              <button id="action-save" className="btn" type="submit">Save</button>
-              <button onClick={disableBtn} id="action-cancel" className="btn" type="button">
+              <button id="action-save" className="btn" type="submit">
+                Save
+              </button>
+              <button
+                onClick={disableBtn}
+                id="action-cancel"
+                className="btn"
+                type="button"
+              >
                 Cancel
               </button>
             </div>
@@ -114,7 +221,7 @@ function CreateUserModal({ disableBtn }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default CreateUserModal
+export default CreateUserModal;
