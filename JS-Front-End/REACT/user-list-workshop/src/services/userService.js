@@ -39,7 +39,7 @@ export const createUser = async (userData) => {
 export const deleteUserFromDb = async (userId) => {
     try {
     
-        const response = await fetch(url, {
+        const response = await fetch(`${url}/${userId}`, {
             method: "DELETE",
         });
 
@@ -52,4 +52,13 @@ export const deleteUserFromDb = async (userId) => {
     } catch (error) {
         console.error("An error occurred while deleting the user:", error);
     }
+}
+
+
+export const getOneUser = async (userId)=>{
+
+  const response = await fetch(`${url}/${userId}`);
+  const user = await response.json();
+  return user;
+
 }

@@ -162,7 +162,7 @@ function Main() {
         </div>
       </div> */}
     </section>
-    {/* User details component  */}
+   {/* User details component  */} 
     {/* <div class="overlay">
   <div class="backdrop"></div>
   <div class="modal">

@@ -15,7 +15,7 @@ function UserList() {
 
 async function deleteUser(userId) {
     setUsers((users) => users.filter((user) => user._id !== userId));
-    // deleteUserFromDb(userId)
+    deleteUserFromDb(userId)
 }
 
 function createUserHandler(){
@@ -136,13 +136,19 @@ function updateUsersInUI(){
                     {/* Table row component */}
 
                     {users.map((user) => (
-                        <SingleUser deleteUser={deleteUser} key={user._id} user={user} />
+                        <SingleUser 
+                        deleteUser={deleteUser} 
+                        key={user._id}
+                        user={user}
+                        
+                         />
                     ))}
                 </tbody>
             </table>
 
             <button onClick={createUserHandler} className="btn-add btn">Add new user</button>
             {showBtn && <CreateUserModal updateUsersInUI={updateUsersInUI} disableBtn={disableBtn}/>}
+            
         </>
     );
 }
