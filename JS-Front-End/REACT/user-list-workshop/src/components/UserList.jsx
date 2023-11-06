@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import SingleUser from "./SingleUser";
 import { getAllUsers,deleteUserFromDb } from "../services/userService";
 import CreateUserModal from "./CreateUserModal";
+import LoadingSpinner from "./LoadingSpinner";
+
 
 function UserList() {
 
     const [users, setUsers] = useState([]);
     const [showBtn,setShowBtn] = useState(false)
+    const [spinner,setSpinner]=useState(false)
 
 
     useEffect(() => {
-        getAllUsers().then((result) => setUsers(result));
+        setSpinner(true)
+        getAllUsers().then((result) => setUsers(result)).finally(()=>setSpinner(false));
     }, []);
 
 async function deleteUser(userId) {
@@ -148,6 +152,7 @@ function updateUsersInUI(){
 
             <button onClick={createUserHandler} className="btn-add btn">Add new user</button>
             {showBtn && <CreateUserModal updateUsersInUI={updateUsersInUI} disableBtn={disableBtn}/>}
+            {spinner && <LoadingSpinner/>}
             
         </>
     );
